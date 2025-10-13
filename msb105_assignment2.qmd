@@ -15,19 +15,87 @@ format: html
 
 ```{r}
 
-```
+# andre pakker 
 
-```{r}
-# install packages modelr
+library(dplyr)
+library(ggplot2)
+library(tidyverse)
+
+# laster inn pakken modelr og datasett heights
 install.packages("modelr")
 library(modelr)
+heights <- modelr::heights
+heights
 
 ```
 
-```{r}
+Datasettet 'heights' som benyttes i denne oppgavaen er hentet fra pakken 'modelr'.Datasettet inneholder informasjon om enkeltpersoner, og består av 7006 observasjoner og 8 variabler: inntekt, høyde, vekt, alder, sivilstatus, kjønn, utdanningsnivå og AFQT-skår.  Variablene omfatter blant annet inntekt (income), alder (age), kjønn (sex) og sivilstatus (marital), som er relevante for denne oppgaven.  
 
-# viser datasett heights
-data(heights)
+Før analysen ble variablene i datasettet gitt nye navn, og datasettet ble ryddet ved å fjerne observasjoner med manglende verdier (NA) og nullverdier. De resterende observasjonene utgjør grunnlaget for videre analyse.
+
+```{r}
+# rydder datasettet
+
+# viser struktur av datasettet, og summary 
+str(heights)
+summary(heights)
+
+# rename, inntekt, alder, kjonn, sivilstatus
+heights <- heights %>%
+  select(income, age, sex, marital) %>%
+  rename(
+    inntekt = income,
+    alder = age,
+    kjonn = sex,
+    sivilstatus = marital
+  ) %>%
+  # fjerner NA og 0-veridi 
+  filter(
+    !is.na(inntekt), !is.na(alder), !is.na(kjonn), !is.na(sivilstatus),
+    inntekt > 0,
+    alder > 0
+  )
+
+# sjekker igjen struktur og summary 
+str(heights)
+summary(heights)
+
+```
+
+Etter at datasettet ble filtrert og tilpasset analysen, består det nå av 5 266 observasjoner og fire variabler: inntekt, alder, kjønn og sivilstatus.
+Resultatet viser at:
+Variabelen inntekt varierer fra 45 til 343 830 USD, med et gjennomsnitt på rundt 54 800.
+Alder varierer fra 47 til 56 år, med et gjennomsnitt på ca. 51 år.
+Kjønnsfordelingen er jevn (2 657 menn og 2 609 kvinner).
+Den største gruppen i datasettet er gifte personer (married 3101), etterfulgt av skilte (divorced 1115 ) og ugifte (single 710 ).
+Etter rensingen består datasettet dermed av et balansert og ryddig utvalg som danner grunnlaget for videre beskrivelse og analyse av sammenhengen mellom inntekt, alder, kjønn og sivilstatus.
+
+
+
+```{r}
+# Beskrivelse av data
+library(scales)
+
+beskriver_inntekt <- heights %>%
+  ggplot(aes(x = inntekt)) +
+  geom_histogram(binwidth = 10000, fill = "skyblue", color = "white") +
+  scale_x_continuous(
+    breaks = seq(0, 350000, 50000),  # Viser et merke for hver 50 000 USD
+    labels = label_number(big.mark = " ", suffix = " USD")
+  ) +
+  labs(
+    title = "Fordeling av inntekt",
+    x = "Inntekt (USD)",
+    y = "Antall personer"
+  ) +
+  theme_minimal(base_size = 14) +      # Større tekst for bedre lesbarhet
+  theme(
+    panel.grid.major = element_line(color = "grey80", size = 0.6),  # Tydelige hovedrutenettlinjer
+    panel.grid.minor = element_blank(),                            # Fjerner små rutenettlinjer
+    axis.text.x = element_text(angle = 45, hjust = 1)              # Skråstiller teksten på x-aksen for å unngå overlapp
+  )
+
+beskriver_inntekt
 
 
 

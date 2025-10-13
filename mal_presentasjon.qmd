@@ -1,0 +1,143 @@
+---
+title: "Mal presentasjon"
+author: "N N"
+institute: "HVL"
+date: last-modified
+date-format: "dddd D MMM, YYYY"
+lang: NO_nb
+# lang: NO_nn
+citeproc: true
+number-sections: true
+format:
+  revealjs: 
+    theme: simple
+    number-depth: 2
+    slide-number: c/t
+    toc: true
+    toc-depth: 1
+    smaller: true
+    scrollable: true
+    preview-links: auto
+    footer: "Presentasjon «Assignment 2» msb105"
+    fig-width: 7
+  pptx: default
+  html: default
+  typst:
+    papersize: a4
+  pdf:
+    papersize: a4
+editor: source
+editor_options:
+  markdown:
+    wrap: 72
+    canonical: true
+    chunk_output_type: console
+echo: true
+eval: true
+bibliography: PresRef.bib
+nocite: '@*'
+---
+
+## Introduksjon
+
+EDA av variablene X, Y og Z fra datasettet `modelr::heights`
+
+## Litteraturgjennomgang
+
+Hva er kjent om sammenhengen mellom disse variablene (fra X, Y og Z)
+andre studier.
+
+@knuth1984 er en sitering.
+
+## Konklusjon
+
+## Referanser
+
+::: {#refs}
+:::
+
+## Appendiks
+
+Litt tips om hvordan presentasjoner skrives som Quarto dokumenter.
+
+Ovenfor ser en hvordan man kan styre hvor referansene havner. Her vil vi
+ha dem før appendikset.
+
+Overskrift på nivå to (`##`) gir ny slide. På nivå en (`#`) gir ny
+tittle slide.
+
+## «incremental lists»
+
+Med følgende konstruksjon kan en få «incremental lists»:
+
+::: incremental
+-   Første punkt
+    -   Første underpunkt
+    -   Andre underpunkt
+-   Andre punkt
+-   Tredje punkt
+:::
+
+## «incremental definition list»
+
+::: incremental
+
+Definisjon en
+
+:   Slik er definisjon 1.
+
+Definisjon to
+
+:   Slik er definisjon 2.
+:::
+
+## To kolonner
+
+::::::: columns
+:::: {.column width="50%"}
+::: incremental
+-   Første punkt
+    -   Første underpunkt
+    -   Andre underpunkt
+-   Andre punkt
+-   Tredje punkt
+:::
+::::
+
+:::: {.column width="50%"}
+::: incremental
+
+Definisjon en
+
+:   Slik er definisjon 1.
+
+Definisjon to
+
+:   Slik er definisjon 2.
+:::
+::::
+:::::::
+
+## Få støtte for norsk i `pdf` format
+
+Ta en titt på [denne siden](https://yihui.org/tinytex/).
+
+Hvis tinytex ikke alt er installert:
+
+-   installer r-pakken tinytex
+-   gi så kommandoen `tinytex::install_tinytex()` i R Console
+-   for å få norsk ordeling gi kommandoen
+    `tinytex::tlmgr_install("hyphen-norwegian")`
+-   Dette vil laste inn støtte for norsk ordeling og bygge en latex
+    format fil med innebygd støtte for norsk ordeling.
+-   Her er et [eksempeldokument](nn.qmd){download="nn.qmd"} som dere kan
+    kjøre.
+    -   Klikker dere på `eksempeldokument` blir filen `nn.qmd` lastet
+        ned til nedlastingsmappen.
+    -   Denne kan så åpnes i RStudio og kjøres.
+
+## Få støtte for norsk i `pdf` format
+
+-   Virker alt som det skal bør dere ende opp med [dette](nn_Tex.pdf).
+-   `Typst` ser ut til å håndtere norsk orddeling som default. Eksemplet
+    er tilgjengelig i `Typst` versjon [her](nn_Typst.pdf).
