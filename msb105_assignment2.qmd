@@ -1,13 +1,19 @@
 ---
 title: "Sammenhenger mellom inntekt, alder, kjønn og sivilstatus"
-author: "Karin Liang"
+author: "Karin Liang, Katinca Valvatne & Frida Alendal"
 lang: NO_nb
 csl: hvl_apa7_stil_bokmal_v1.csl
-bibliography: 
+bibliography: references.bib
 format: html
+slide-number: true
+theme: simple
 ---
 
 ## Introduction
+
+Hvilke sammenhenger har vi mellom inntekt, alder, kjønn og sivilstatus? I denne presentasjonen undersøker vi disse sammenhengene i datasettet *modelr::heights*. Tidligere forskning viser at personlige og sosiale kjennetegn ofte henger sammen med økonomisk utbytte. For eksempel finner Judge & Cable (2004) en positiv sammenheng mellom høyde og inntekt, kontrollert for kjønn og alder. Vi vil se om vi kan avdekke lignende mønstre med våre variabler, og hvorvidt kjønn og sivilstatus spiller en rolle for inntektsforskjeller. 
+
+I analysen kombinerer vi beskrivende statistikk og grafer for å identifisere mønstre mellom grupper. For eksempel hvordan menn og kvinner, eller gifte og single, skiller seg i gjennomsnittsinntekt, og om alder modererer disse forskjellene.
 
 ## Review of literature
 
@@ -20,6 +26,9 @@ format: html
 library(dplyr)
 library(ggplot2)
 library(tidyverse)
+library(scales)
+library(vtable)
+library(flextable)
 
 # laster inn pakken modelr og datasett heights
 install.packages("modelr")
@@ -29,14 +38,14 @@ heights
 
 ```
 
-Datasettet 'heights' som benyttes i denne oppgavaen er hentet fra pakken 'modelr'.Datasettet inneholder informasjon om enkeltpersoner, og består av 7006 observasjoner og 8 variabler: inntekt, høyde, vekt, alder, sivilstatus, kjønn, utdanningsnivå og AFQT-skår.  Variablene omfatter blant annet inntekt (income), alder (age), kjønn (sex) og sivilstatus (marital), som er relevante for denne oppgaven.  
+Datasettet 'heights' som benyttes i denne oppgavaen er hentet fra pakken 'modelr'.Datasettet inneholder informasjon om enkeltpersoner, og består av 7006 observasjoner og 8 variabler: inntekt, høyde, vekt, alder, sivilstatus, kjønn, utdanningsnivå og AFQT-skår. Variablene omfatter blant annet inntekt (income), alder (age), kjønn (sex) og sivilstatus (marital), som er relevante for denne oppgaven.
 
 Før analysen ble variablene i datasettet gitt nye navn, og datasettet ble ryddet ved å fjerne observasjoner med manglende verdier (NA) og nullverdier. De resterende observasjonene utgjør grunnlaget for videre analyse.
 
 ```{r}
 # rydder datasettet
 
-# viser struktur av datasettet, og summary 
+# viser struktur av datasettet og summary
 str(heights)
 summary(heights)
 
@@ -49,34 +58,52 @@ heights <- heights %>%
     kjonn = sex,
     sivilstatus = marital
   ) %>%
-  # fjerner NA og 0-veridi 
+  # fjerner NA-verdi og 0-verdi 
   filter(
     !is.na(inntekt), !is.na(alder), !is.na(kjonn), !is.na(sivilstatus),
     inntekt > 0,
     alder > 0
   )
 
-# sjekker igjen struktur og summary 
+# sjekker igjen struktur og summary
 str(heights)
 summary(heights)
 
 ```
 
 Etter at datasettet ble filtrert og tilpasset analysen, består det nå av 5 266 observasjoner og fire variabler: inntekt, alder, kjønn og sivilstatus.
-Resultatet viser at:
-Variabelen inntekt varierer fra 45 til 343 830 USD, med et gjennomsnitt på rundt 54 800.
-Alder varierer fra 47 til 56 år, med et gjennomsnitt på ca. 51 år.
-Kjønnsfordelingen er jevn (2 657 menn og 2 609 kvinner).
-Den største gruppen i datasettet er gifte personer (married 3101), etterfulgt av skilte (divorced 1115 ) og ugifte (single 710 ).
+
+Resultatene fra summary viser følgende: Inntekt varierer fra 45 til 343 830 USD, med en median på 40 000 USD og et gjennomsnitt på 54 819 USD. Alder varierer mellom 47 og 56 år, med en median på 51 år. Kjønn er jevnt fordelt, med 2 657 menn og 2 609 kvinner. Sivilstatus viser at flertallet (3 101 personer) er gift, mens 710 er single, 1 115 er skilt, 233 separert og 107 enker/enkemenn.
+
 Etter rensingen består datasettet dermed av et balansert og ryddig utvalg som danner grunnlaget for videre beskrivelse og analyse av sammenhengen mellom inntekt, alder, kjønn og sivilstatus.
 
+```{r}
+# Tabell for de to numeriske variablene: inntekt og alder
+heights %>%
+  select(inntekt, alder) %>%                # Velger kun de numeriske variablene
+  vtable::st(
+    data   = .,                             # Bruker det nåværende datasettet
+    out    = "return",                      # Returnerer tabellen i stedet for å skrive den ut
+    labels = c(
+      inntekt = "Inntekt (USD)",
+      alder   = "Alder (år)"
+    ),
+    add.median = TRUE                       # Legger til median i tabellen
+  ) %>%
+  as_flextable() %>%
+  autofit()
+```
 
+Denne tabellen viser en deskriptiv oppsummering av de numeriske variablene i datasettet: inntekt og alder.
+
+De fleste har moderate inntekter, men noen få med svært høye verdier trekker gjennomsnittet kraftig opp. Aldersspennet er lite, deltakerne er i hovedsak i samme aldersgruppe .
+
+Tabellresultatene viser at datasettet består av en jevn og homogen gruppe når det gjelder alder, men med stor variasjon i inntektsnivå.
 
 ```{r}
-# Beskrivelse av data
-library(scales)
+# figur for å beskrive fordeling av inntekt
 
-beskriver_inntekt <- heights %>%
+fordeling_inntekt <- heights %>%
   ggplot(aes(x = inntekt)) +
   geom_histogram(binwidth = 10000, fill = "skyblue", color = "white") +
   scale_x_continuous(
@@ -85,22 +112,188 @@ beskriver_inntekt <- heights %>%
   ) +
   labs(
     title = "Fordeling av inntekt",
-    x = "Inntekt (USD)",
+    x = "Årlig inntekt (USD)",
     y = "Antall personer"
   ) +
   theme_minimal(base_size = 14) +      # Større tekst for bedre lesbarhet
   theme(
-    panel.grid.major = element_line(color = "grey80", size = 0.6),  # Tydelige hovedrutenettlinjer
+    panel.grid.major = element_line(color = "grey80", linewidth = 0.6),  # Tydelige hovedrutenettlinjer
     panel.grid.minor = element_blank(),                            # Fjerner små rutenettlinjer
     axis.text.x = element_text(angle = 45, hjust = 1)              # Skråstiller teksten på x-aksen for å unngå overlapp
   )
-
-beskriver_inntekt
-
-
+fordeling_inntekt
 ```
 
+Variabelen inntekt representerer den årlige inntekten (målt i USD) for hver observasjon i datasettet.
+
+Figuren fordeling av inntekt viser hvordan inntekten fordeler seg blant 5 266 personene i datasettet. De fleste observasjonene ligger mellom 20 000 og 80 000 USD, som representerer hovedtyngden av inntektene. Samtidig ser vi at et lite mindretall tjener vesentlig mer enn flertallet. De få personer har svært høye inntekter, helt opp mot over 300 000 USD, noe som trekker gjennomsnittet betydelig opp. Derfor er fordelingen høyreskjev.
+
+<<<<<<< HEAD
+=======
+```{r}
+# Beskrivelse av data(alder)
+
+fordeling_alder <- heights %>%
+  ggplot(aes(x = alder)) +
+  geom_histogram(binwidth = 1, fill = "mediumaquamarine", color = "white") +
+  scale_x_continuous(
+    breaks = seq(45, 60, 1)
+  ) +
+  labs(
+    title = "Fordeling av alder",
+    x = "Alder (år)",
+    y = "Antall personer"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    panel.grid.major = element_line(color = "grey80", linewidth = 0.6),
+    panel.grid.minor = element_blank(),
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )
+fordeling_alder
+
+>>>>>>> Introduksjon
+```
+
+Variabelen alder viser deltakernes alder målt i hele år.
+
+Figuren fordeling av kjønn viser at aldersfordelingen mellom 47 til 56 år, er jevn og konsentrert innenfor et smalt intervall. De fleste observasjonene ligger mellom 49 og 53 år, med en gjennomsnittsalder på omtrent 51 år. Aldersspennet er lite, noe som betyr at de fleste personene i datasettet er omtrent like gamle.
+
+```{r}
+# Tabell for de to kategoriske variablene: sivilstatus og kjønn
+heights %>%
+  select(sivilstatus, kjonn) %>%            # Velger kun de kategoriske variablene
+  vtable::st(
+    data = ., 
+    out = "return",                         # Returnerer tabellen som et objekt
+    labels = c(
+      sivilstatus = "Sivilstatus",
+      kjonn = "Kjønn"
+    )
+  ) %>%
+  as_flextable() %>%
+  autofit()
+```
+
+Denne tabellen viser en deskriptiv oppsummering av de kategoriske variablene i datasettet: sivilstatus og kjønn.
+
+Flertallet av personene i datasettet er gift (married) — rundt 59 % av utvalget (3 101 personer). 710 personer (13 %) er single, mens 1 115 (21 %) er skilt (divorced). De resterende er separert (233 personer) og enkemann/enke (107 personer).
+
+Fordelingen mellom kjønn er nesten helt jevn, med 2 657 menn (50,5 %) og 2 609 kvinner (49,5 %).
+
+```{r}
+# Tabell: Beskrivende statistikk for inntekt og alder etter kjønn
+
+heights %>%
+  select(kjonn, inntekt, alder) %>%
+  vtable::st(
+    group = "kjonn",
+    group.long = TRUE,
+    labels = c(
+      inntekt = "Inntekt (USD)",
+      alder   = "Alder (år)"
+    ),
+    out = "return"
+  ) %>%
+  as_flextable() %>%
+  autofit()
+
+# figure 
+fordeling_kjonn <- heights %>%
+  ggplot(aes(x = kjonn)) +
+  geom_bar(fill = "sandybrown", color = "white") +
+      geom_text(
+    stat = "count",
+    aes(label = ..count..),
+    vjust = -0.3,           # Tekst som vises over kolonnen
+    size = 2,               # Skriftstørrelse
+    color = "black"         # Skriftfarge
+  ) +
+  labs(
+    title = "Fordeling av kjønn",
+    x = "Kjønn",
+    y = "Antall personer"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    panel.grid.major = element_line(color = "grey80", linewidth = 0.6),
+    panel.grid.minor = element_blank()
+  )
+fordeling_kjonn
+ 
+```
+
+Variabelen kjønn beskriver fordelingen mellom menn og kvinner i datasettet.
+
+Figuren fordeling av kjønn viser at kjønnsfordelingen av 5 266 observasjonene i datasettet er nesten helt balansert. Av de 5 266 observasjonene er det 2 657 menn og 2 609 kvinner. Forskjellen mellom gruppene er dermed svært liten, noe som betyr at analysen ikke vil være skjev med hensyn til kjønn.
+
+```{r}
+# Tabell: Beskrivende statistikk for inntekt og alder etter sivilstatus (Gift vs. Ikke gift)
+
+suppressWarnings({
+  heights %>%
+    mutate(
+      sivilgruppe = if_else(sivilstatus == "married", "Gift", "Ikke gift"),
+      sivilgruppe = as.character(sivilgruppe)   # konvertert til tekst
+    ) %>%
+    select(sivilgruppe, inntekt, alder) %>%
+    vtable::st(
+      group      = "sivilgruppe",
+      group.long = TRUE,
+      summ       = c("notNA(x)", "mean(x)", "sd(x)"),
+      summ.names = c("N", "Mean", "SD"),
+      labels     = c(
+        inntekt = "Inntekt (USD)",
+        alder   = "Alder (år)"
+      ),
+      out        = "return"
+    ) %>%
+    as_flextable() %>%
+    set_caption("Tabell X. Beskrivende statistikk for inntekt og alder etter sivilstatus (Gift vs. Ikke gift)") %>%
+    autofit()
+})
+
+
+
+# figure
+fordeling_sivilstatus <- heights %>%
+  ggplot(aes(x = sivilstatus)) +
+  geom_bar(fill = "tomato", color = "white") +
+    geom_text(
+    stat = "count",
+    aes(label = ..count..),
+    vjust = -0.3,           # Tekst som vises over kolonnen
+    size = 2,               # Skriftstørrelse
+    color = "black"         # Skriftfarge
+  ) +
+  labs(
+    title = "Fordeling av sivilstatus",
+    x = "Sivilstatus",
+    y = "Antall personer"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    panel.grid.major = element_line(color = "grey80", linewidth = 0.6),
+    panel.grid.minor = element_blank(),
+    axis.text.x = element_text(angle = 30, hjust = 1)
+  )
+fordeling_sivilstatus
+```
+
+Variabelen sivilstatus viser 5266 deltakernes ekteskapsstatus og består av fem kategorier: single, married, separated, divorced og widowed.\
+Figuren fordeling av sivilstatus viser hvordan observasjonene fordeler seg mellom disse gruppene.
+
+Det fremgår tydelig at flertallet av personene er gift (married), med 3 101 observasjoner, noe som utgjør nærmere 59 prosent av utvalget. Videre er 1 115 personer skilt (divorced) og 710 single (never married), mens kategoriene separated (233) og widowed (107) utgjør en mindre andel.
+
+Fordelingen av sivilstatus viser dermed et mønster som er vanlig i voksenbefolkningen, der de fleste er gift eller tidligere gift.
+
 ## Analysis
+
+```{r}
+
+
+ 
+```
 
 ## Results
 
