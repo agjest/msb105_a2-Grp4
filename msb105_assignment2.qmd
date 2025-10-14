@@ -98,7 +98,6 @@ beskriver_inntekt <- heights %>%
 beskriver_inntekt
 
 
-
 ```
 
 ## Analysis
