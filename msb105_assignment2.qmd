@@ -3,7 +3,7 @@ title: "Sammenhenger mellom inntekt, alder, kjønn og sivilstatus"
 author: "Karin Liang, Katinca Valvatne & Frida Alendal"
 lang: NO_nb
 csl: hvl_apa7_stil_bokmal_v1.csl
-bibliography: 
+bibliography: references.bib
 format: html
 slide-number: true
 theme: simple
