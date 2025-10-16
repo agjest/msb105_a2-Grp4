@@ -4,7 +4,18 @@ author: "Karin Liang, Katinca Valvatne & Frida Alendal"
 lang: NO_nb
 csl: hvl_apa7_stil_bokmal_v1.csl
 bibliography: references.bib
-format: html
+format:
+  revealjs: 
+    theme: simple
+    number-depth: 2
+    slide-number: c/t
+    toc: true
+    toc-depth: 1
+    smaller: true
+    scrollable: true
+    preview-links: auto
+    footer: "Presentasjon «Assignment 2» msb105"
+    fig-width: 7
 slide-number: true
 theme: simple
 ---
@@ -15,10 +26,36 @@ Hvilke sammenhenger har vi mellom inntekt, alder, kjønn og sivilstatus? I denne
 
 I analysen kombinerer vi beskrivende statistikk og grafer for å identifisere mønstre mellom grupper. For eksempel hvordan menn og kvinner, eller gifte og single, skiller seg i gjennomsnittsinntekt, og om alder modererer disse forskjellene.
 
-## Review of literature
+## Litteraturgjennomgang
+
+Flere studier har tidligere undersøkt hvordan demografiske faktorer som kjønn, sivilstatus og alder påvirker individers inntektsnivå. Et gjennomgående funn i forskningen er at både biologiske og sosiale forskjeller skaper systematiske mønstre i økonomisk utbytte. 
+
+### Kjønn og inntekt
+Ifølge @judge2004 viser høyde, som ofte er korrelert med maskuline trekk og sosial status, en positiv sammenheng med karrieresuksess og inntekt. Studien fant at høyere personer i snitt tjener mer, også etter kontroll for kjønn, alder og vekt. Sammenhengen mellom høyde og inntekt forklares blant annet gjennom sosiale mekanismer der høyere personer tilskrives større autoritet og selvtillit, noe som igjen påvirker både jobbpresentasjon og lederfremgang. Selv om effekten var sterkere blant menn enn kvinner, var forskjellen ikke statistisk signifikant, noe som antyder at sosiale oppfatninger om status knyttet til fysiske kjennetegn påvirker begge kjønn. 
+
+### Sivilstatus og økonomisk velstand
+@seeborg2004 undersøkte effekten av endringer i sivilstatus på levestandard ved å analysere data som fulgte de samme personene over flere år gjennom *National Longitudinal Survey of Youth (NLSY)*. Studien viser at ekteskap har en positiv effekt på kvinners økonomiske situasjon, mens menn i mindre grad påvirkes. Ved skilsmisse opplever kvinner derimot en betydelig nedgang i sin økonomiske levestandard, mens menn i mange tilfeller opplever en svak økning. Dette forklares gjennom ulik arbeidsdeltakelse, foreldreansvar og kjønnsroller som vedvarer i arbeidsmarkedet. Dermed kan sivilstatus betraktes som en sentral sosial indikator på økonomisk stabilitet, spesielt for kvinner.
+
+### Utdanning, kjønn og inntektsforskjeller
+@xie2022 viser at utdanningsnivå har en avgjørende betydning for inntektsnivå, men at kjønnsforskjeller vedvarer selv etter kontroll for utdanning. Menn tjener gjennomgående mer enn kvinner på alle utdanningsnivåer, og dette gapet øker i høyere stillinger. Studien påpeker også at rase og ekteskap påvirker inntekt gjennom sammensatte sosiale mekanismer, der menn oftere drar nytte av tradisjonelle familiemønstre, mens kvinner i større grad bærer økonomiske konsekvenser ved skilsmisse eller delt omsorgsansvar.
+
+### Husholdningsstruktur og sosioøkonomiske profiler
+Den nyere studien @mohanneill2014 undersøker hvordan kombinasjonen av kjønn og sivilstatus påvirker husholdningers økonomiske situasjon i USA. Funnene viser at gifte menn har den høyeste samlede inntekten i familien, mens enslige kvinner, særlig de med barn, befinner seg i den mest økonomisk utsatte gruppen. Studien understreker hvordan kjønn og sivilstatus virker sammen og skaper tydelig mønstre i sosioøkonomisk ulikhet mellom husholdninger.  
+
+### Alder og livsløp
+Flere økonomiske teorier viser at inntekt typisk følger et livsløp der den øker med alder og erfaring frem til et viss punkt før den flater ut. @seeborg2004 kontrollerte for alder i sine regresjonsmodeller og fant en tydelig positiv sammenheng mellom utdanning, alder og inntekt. Dette støtter teorien om at erfaring og utdanning bygges opp over tid og bidrar til høyere økonomisk utbytte.
+
+### Samlet perspektiv
+Når vi kombinerer funnene fra @judge2004, @seeborg2004, @xie2022 og @mohanneill2014, ser vi at inntektforskjeller pårvirkes av både individuelle faktorer (som alder og utdanning) og sosiale faktorer (som kjønn og sivilsatus). Forskningen viser tydelig at kjønn og familieforhold fortsatt har stor betydning for økonomisk velstand, og at effekten av alder og utdanning i mange tilfeller forsterkes eller svekkes av sosiale roller og strukturer. Dette gir et solid teoretisk grunnlag for å analysere sammenhengen mellom inntekt, alder, kjønn og sivilstatus i vårt datasett fra *modelr::heights*. 
+
+
 
 ## Description of data
-
+::: incremental
+-   Første punkt
+    - laster inn og rydder datassettet 'heights'
+    
+### Laster inn og rydder datassettet 'heights' 
 ```{r}
 # andre pakker 
 library(dplyr)
@@ -29,24 +66,23 @@ library(vtable)
 library(flextable)
 
 # laster inn pakken modelr og datasett heights
-install.packages("modelr")
+# install.packages("modelr")
 library(modelr)
 heights <- modelr::heights
-heights
-
 ```
 
-Datasettet 'heights' som benyttes i denne oppgavaen er hentet fra pakken 'modelr'.Datasettet inneholder informasjon om enkeltpersoner, og består av 7006 observasjoner og 8 variabler: inntekt, høyde, vekt, alder, sivilstatus, kjønn, utdanningsnivå og AFQT-skår. Variablene omfatter blant annet inntekt (income), alder (age), kjønn (sex) og sivilstatus (marital), som er relevante for denne oppgaven.
+Datasettet 'heights' som benyttes i denne oppgaven er hentet fra pakken 'modelr'. Datasettet inneholder informasjon om enkeltpersoner, og består av 7006 observasjoner og 8 variabler: inntekt, høyde, vekt, alder, sivilstatus, kjønn, utdanningsnivå og AFQT-skår. 
 
+```{r}
+# viser 
+heights
+```
+
+Fire variabler, inntekt, alder, kjønn og sivilstatus, er relevante for denne oppgaven.
 Før analysen ble variablene i datasettet gitt nye navn, og datasettet ble ryddet ved å fjerne observasjoner med manglende verdier (NA) og nullverdier. De resterende observasjonene utgjør grunnlaget for videre analyse.
 
 ```{r}
 # rydder datasettet
-
-# viser struktur av datasettet og summary
-str(heights)
-summary(heights)
-
 # rename, inntekt, alder, kjonn, sivilstatus
 heights <- heights %>%
   select(income, age, sex, marital) %>%
@@ -62,6 +98,7 @@ heights <- heights %>%
     inntekt > 0,
     alder > 0
   )
+heights
 
 # sjekker igjen struktur og summary
 str(heights)
@@ -75,8 +112,12 @@ Resultatene fra summary viser følgende: Inntekt varierer fra 45 til 343 830 USD
 
 Etter rensingen består datasettet dermed av et balansert og ryddig utvalg som danner grunnlaget for videre beskrivelse og analyse av sammenhengen mellom inntekt, alder, kjønn og sivilstatus.
 
+-   Andre punkt
+    - beskrivelse av data
+    
+### beskriver variabler inntekt og alder
 ```{r}
-# Tabell for de to numeriske variablene: inntekt og alder
+# beskrivende statistikk i tabell for de to numeriske variablene: inntekt og alder
 heights %>%
   select(inntekt, alder) %>%                # Velger kun de numeriske variablene
   vtable::st(
@@ -91,16 +132,13 @@ heights %>%
   as_flextable() %>%
   autofit()
 ```
-
 Denne tabellen viser en deskriptiv oppsummering av de numeriske variablene i datasettet: inntekt og alder.
 
-De fleste har moderate inntekter, men noen få med svært høye verdier trekker gjennomsnittet kraftig opp. Aldersspennet er lite, deltakerne er i hovedsak i samme aldersgruppe .
+Gjennomsnittlig inntekt i utvalget er 54 819 USD, med en median på 40 000 USD og en stor spredning (standardavvik på 58 394 USD).  Noen få personer har svært høye inntekter 343 830 USD som trekker gjennomsnittet opp. Alderen varierer mellom 47 og 56 år, med et gjennomsnitt på 51 år.  
 
-Tabellresultatene viser at datasettet består av en jevn og homogen gruppe når det gjelder alder, men med stor variasjon i inntektsnivå.
-
+Resultatene viser at deltakerne er omtrent like gamle, men at inntektene varierer mye.
 ```{r}
 # figur for å beskrive fordeling av inntekt
-
 fordeling_inntekt <- heights %>%
   ggplot(aes(x = inntekt)) +
   geom_histogram(binwidth = 10000, fill = "skyblue", color = "white") +
@@ -129,7 +167,6 @@ Figuren fordeling av inntekt viser hvordan inntekten fordeler seg blant 5 266 pe
 
 ```{r}
 # Beskrivelse av data(alder)
-
 fordeling_alder <- heights %>%
   ggplot(aes(x = alder)) +
   geom_histogram(binwidth = 1, fill = "mediumaquamarine", color = "white") +
@@ -143,7 +180,7 @@ fordeling_alder <- heights %>%
   ) +
   theme_minimal(base_size = 14) +
   theme(
-    panel.grid.major = element_line(color = "grey80", size = 0.6),
+    panel.grid.major = element_line(color = "grey80", linewidth = 0.6),
     panel.grid.minor = element_blank(),
     axis.text.x = element_text(angle = 45, hjust = 1)
   )
@@ -153,10 +190,11 @@ fordeling_alder
 
 Variabelen alder viser deltakernes alder målt i hele år.
 
-Figuren fordeling av kjønn viser at aldersfordelingen mellom 47 til 56 år, er jevn og konsentrert innenfor et smalt intervall. De fleste observasjonene ligger mellom 49 og 53 år, med en gjennomsnittsalder på omtrent 51 år. Aldersspennet er lite, noe som betyr at de fleste personene i datasettet er omtrent like gamle.
+Figuren fordeling av alder viser at aldersfordelingen mellom 47 til 56 år, er jevn og konsentrert innenfor et smalt intervall. De fleste observasjonene ligger mellom 48 og 55 år.Det er få personer som er 47 eller 56 år. Aldersspennet er lite, noe som betyr at de fleste personene i datasettet er omtrent like gamle. 
 
+### beskriver variabler sivilstatus og kjønn
 ```{r}
-# Tabell for de to kategoriske variablene: sivilstatus og kjønn
+# beskrivende statistikk i tabell for de to kategoriske variablene: sivilstatus og kjønn
 heights %>%
   select(sivilstatus, kjonn) %>%            # Velger kun de kategoriske variablene
   vtable::st(
@@ -177,13 +215,8 @@ Flertallet av personene i datasettet er gift (married) — rundt 59 % av utvalge
 
 Fordelingen mellom kjønn er nesten helt jevn, med 2 657 menn (50,5 %) og 2 609 kvinner (49,5 %).
 
-
-
-
-
 ```{r}
 # Tabell: Beskrivende statistikk for inntekt og alder etter kjønn
-
 heights %>%
   select(kjonn, inntekt, alder) %>%
   vtable::st(
@@ -198,13 +231,13 @@ heights %>%
   as_flextable() %>%
   autofit()
 
-# figure 
+# figuren for fordeling av kjønn
 fordeling_kjonn <- heights %>%
   ggplot(aes(x = kjonn)) +
   geom_bar(fill = "sandybrown", color = "white") +
       geom_text(
     stat = "count",
-    aes(label = ..count..),
+    aes(label = after_stat(count)),
     vjust = -0.3,           # Tekst som vises over kolonnen
     size = 2,               # Skriftstørrelse
     color = "black"         # Skriftfarge
@@ -216,11 +249,10 @@ fordeling_kjonn <- heights %>%
   ) +
   theme_minimal(base_size = 14) +
   theme(
-    panel.grid.major = element_line(color = "grey80", size = 0.6),
+    panel.grid.major = element_line(color = "grey80", linewidth = 0.6),
     panel.grid.minor = element_blank()
   )
 fordeling_kjonn
- 
 ```
 
 Variabelen kjønn beskriver fordelingen mellom menn og kvinner i datasettet.
@@ -230,29 +262,24 @@ Figuren fordeling av kjonn viser at kjønnsfordelingen av 5 266 observasjonene i
 ```{r}
 # Tabell: Beskrivende statistikk for inntekt og alder etter sivilstatus (Gift vs. Ikke gift)
 
-suppressWarnings({
-  heights %>%
-    mutate(
-      sivilgruppe = if_else(sivilstatus == "married", "Gift", "Ikke gift"),
-      sivilgruppe = as.character(sivilgruppe)   # konvertert til tekst
-    ) %>%
-    select(sivilgruppe, inntekt, alder) %>%
-    vtable::st(
-      group      = "sivilgruppe",
-      group.long = TRUE,
-      summ       = c("notNA(x)", "mean(x)", "sd(x)"),
-      summ.names = c("N", "Mean", "SD"),
-      labels     = c(
-        inntekt = "Inntekt (USD)",
-        alder   = "Alder (år)"
-      ),
-      out        = "return"
-    ) %>%
-    as_flextable() %>%
-    set_caption("Tabell X. Beskrivende statistikk for inntekt og alder etter sivilstatus (Gift vs. Ikke gift)") %>%
-    autofit()
-})
-
+heights %>%
+  mutate(
+    sivilgruppe = if_else(sivilstatus == "married", "Gift", "Ikke gift"),
+    sivilgruppe = factor(sivilgruppe)        # Setter tydelig som faktor
+  ) %>%
+  select(sivilgruppe, inntekt, alder) %>%
+  vtable::st(
+    group         = "sivilgruppe",
+    group.long    = TRUE,
+    summ          = c("notNA(x)", "mean(x)", "sd(x)"),
+    summ.names    = c("N", "Mean", "SD"),
+    labels        = c(inntekt = "Inntekt (USD)", alder = "Alder (år)"),
+    out           = "return",
+    factor.numeric = TRUE                    # Viktig: hindrer advarsler
+  ) %>%
+  flextable::as_flextable() %>%
+  flextable::set_caption("Tabell. Beskrivende statistikk for inntekt og alder etter sivilstatus (Gift vs. Ikke gift)") %>%
+  flextable::autofit()
 
 
 # figure
@@ -273,24 +300,28 @@ fordeling_sivilstatus <- heights %>%
   ) +
   theme_minimal(base_size = 14) +
   theme(
-    panel.grid.major = element_line(color = "grey80", size = 0.6),
+    panel.grid.major = element_line(color = "grey80", linewidth = 0.6),
     panel.grid.minor = element_blank(),
     axis.text.x = element_text(angle = 30, hjust = 1)
   )
 fordeling_sivilstatus
 ```
 
-Variabelen sivilstatus viser 5266 deltakernes ekteskapsstatus og består av fem kategorier: single, married, separated, divorced og widowed.\
-Figuren fordeling av sivilstatus viser hvordan observasjonene fordeler seg mellom disse gruppene.
+Variabelen sivilstatus viser 5266 deltakernes ekteskapsstatus og består av fem kategorier: single, married, separated, divorced og widowed.Obeservasjonene som er gift har høyere gjennomsnittsinntekt enn de som ikke er gift. Gruppen “Ikke gift” inkluderer personer som er single, skilt, separert eller enke/enkemann.
 
-Det fremgår tydelig at flertallet av personene er gift (married), med 3 101 observasjoner, noe som utgjør nærmere 59 prosent av utvalget. Videre er 1 115 personer skilt (divorced) og 710 single (never married), mens kategoriene separated (233) og widowed (107) utgjør en mindre andel.
+Figuren fordeling av sivilstatus viser hvordan observasjonene fordeler seg mellom disse gruppene. Det fremgår tydelig at flertallet av personene er gift (married), med 3 101 observasjoner, noe som utgjør nærmere 59 prosent av utvalget. Videre er 1 115 personer skilt (divorced) og 710 single (never married), mens kategoriene separated (233) og widowed (107) utgjør en mindre andel.
 
 Fordelingen av sivilstatus viser dermed et mønster som er vanlig i voksenbefolkningen, der de fleste er gift eller tidligere gift.
 
+:::
+
 ## Analysis
 
-### Sammenhengen mellom inntekt og alder
+::: incremental
+-   Første punkt 
+    -Sammenhengen mellom inntekt og alder
 
+### Sammenhengen mellom inntekt og alder
 ```{r}
 # figuren for sammenhengen mellom inntekt og alder
 
@@ -341,6 +372,8 @@ summary(regresjon_alder)
  
 ```
 
+-   Andre punkt
+    - Sammenhengen mellom inntekt og kjønn
 
 ### Sammenhengen mellom inntekt og kjønn
 ```{r}
@@ -374,7 +407,9 @@ summary(regresjon_kjonn)
 ```
 
 
-
+-   Tredje punkt
+    - Sammenhengen mellom inntekt og sivilstatus
+    
 ### Sammenhengen mellom inntekt og sivilstatus
 ```{r}
 # figuren for sammenhengen mellom inntekt og sivilstatus
@@ -414,6 +449,8 @@ summary(regresjon_sivilstatus)
 ```
 
 
+
+:::
 
 ## Results
 
