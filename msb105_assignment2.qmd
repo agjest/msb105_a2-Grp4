@@ -9,13 +9,34 @@ slide-number: true
 theme: simple
 ---
 
-## Introduction
+## Introduksjon
 
 Hvilke sammenhenger har vi mellom inntekt, alder, kjønn og sivilstatus? I denne presentasjonen undersøker vi disse sammenhengene i datasettet *modelr::heights*. Tidligere forskning viser at personlige og sosiale kjennetegn ofte henger sammen med økonomisk utbytte. For eksempel finner Judge & Cable (2004) en positiv sammenheng mellom høyde og inntekt, kontrollert for kjønn og alder. Vi vil se om vi kan avdekke lignende mønstre med våre variabler, og hvorvidt kjønn og sivilstatus spiller en rolle for inntektsforskjeller.
 
 I analysen kombinerer vi beskrivende statistikk og grafer for å identifisere mønstre mellom grupper. For eksempel hvordan menn og kvinner, eller gifte og single, skiller seg i gjennomsnittsinntekt, og om alder modererer disse forskjellene.
 
-## Review of literature
+## Litteraturgjennomgang
+
+Flere studier har tidligere undersøkt hvordan demografiske faktorer som kjønn, sivilstatus og alder påvirker individers inntektsnivå. Et gjennomgående funn i forskningen er at både biologiske og sosiale forskjeller skaper systematiske mønstre i økonomisk utbytte. 
+
+### Kjønn og inntekt
+Ifølge @judge2004 viser høyde, som ofte er korrelert med maskuline trekk og sosial status, en positiv sammenheng med karrieresuksess og inntekt. Studien fant at høyere personer i snitt tjener mer, også etter kontroll for kjønn, alder og vekt. Sammenhengen mellom høyde og inntekt forklares blant annet gjennom sosiale mekanismer der høyere personer tilskrives større autoritet og selvtillit, noe som igjen påvirker både jobbpresentasjon og lederfremgang. Selv om effekten var sterkere blant menn enn kvinner, var forskjellen ikke statistisk signifikant, noe som antyder at sosiale oppfatninger om status knyttet til fysiske kjennetegn påvirker begge kjønn. 
+
+### Sivilstatus og økonomisk velstand
+@seeborg2004 undersøkte effekten av endringer i sivilstatus på levestandard ved å analysere data som fulgte de samme personene over flere år gjennom *National Longitudinal Survey of Youth (NLSY)*. Studien viser at ekteskap har en positiv effekt på kvinners økonomiske situasjon, mens menn i mindre grad påvirkes. Ved skilsmisse opplever kvinner derimot en betydelig nedgang i sin økonomiske levestandard, mens menn i mange tilfeller opplever en svak økning. Dette forklares gjennom ulik arbeidsdeltakelse, foreldreansvar og kjønnsroller som vedvarer i arbeidsmarkedet. Dermed kan sivilstatus betraktes som en sentral sosial indikator på økonomisk stabilitet, spesielt for kvinner.
+
+### Utdanning, kjønn og inntektsforskjeller
+@xie2022 viser at utdanningsnivå har en avgjørende betydning for inntektsnivå, men at kjønnsforskjeller vedvarer selv etter kontroll for utdanning. Menn tjener gjennomgående mer enn kvinner på alle utdanningsnivåer, og dette gapet øker i høyere stillinger. Studien påpeker også at rase og ekteskap påvirker inntekt gjennom sammensatte sosiale mekanismer, der menn oftere drar nytte av tradisjonelle familiemønstre, mens kvinner i større grad bærer økonomiske konsekvenser ved skilsmisse eller delt omsorgsansvar.
+
+### Husholdningsstruktur og sosioøkonomiske profiler
+Den nyere studien @mohanneill2014 undersøker hvordan kombinasjonen av kjønn og sivilstatus påvirker husholdningers økonomiske situasjon i USA. Funnene viser at gifte menn har den høyeste samlede inntekten i familien, mens enslige kvinner, særlig de med barn, befinner seg i den mest økonomisk utsatte gruppen. Studien understreker hvordan kjønn og sivilstatus virker sammen og skaper tydelig mønstre i sosioøkonomisk ulikhet mellom husholdninger.  
+
+### Alder og livsløp
+Flere økonomiske teorier viser at inntekt typisk følger et livsløp der den øker med alder og erfaring frem til et viss punkt før den flater ut. @seeborg2004 kontrollerte for alder i sine regresjonsmodeller og fant en tydelig positiv sammenheng mellom utdanning, alder og inntekt. Dette støtter teorien om at erfaring og utdanning bygges opp over tid og bidrar til høyere økonomisk utbytte.
+
+### Samlet perspektiv
+Når vi kombinerer funnene fra @judge2004, @seeborg2004, @xie2022 og @mohanneill2014, ser vi at inntektforskjeller pårvirkes av både individuelle faktorer (som alder og utdanning) og sosiale faktorer (som kjønn og sivilsatus). Forskningen viser tydelig at kjønn og familieforhold fortsatt har stor betydning for økonomisk velstand, og at effekten av alder og utdanning i mange tilfeller forsterkes eller svekkes av sosiale roller og strukturer. Dette gir et solid teoretisk grunnlag for å analysere sammenhengen mellom inntekt, alder, kjønn og sivilstatus i vårt datasett fra *modelr::heights*. 
+
 
 ## Description of data
 
@@ -29,7 +50,12 @@ library(vtable)
 library(flextable)
 
 # laster inn pakken modelr og datasett heights
-install.packages("modelr")
+options(repos = c(CRAN = "https://cloud.r-project.org"))
+pkgs <- c("modelr","dplyr","ggplot2","scales","vtable","flextable")
+to_install <- setdiff(pkgs, rownames(installed.packages()))
+if (length(to_install)) install.packages(to_install)
+lapply(pkgs, library, character.only = TRUE)
+
 library(modelr)
 heights <- modelr::heights
 heights

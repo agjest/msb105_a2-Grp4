@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="NO_nb" xml:lang="NO_nb"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.42">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Karin Liang, Katinca Valvatne &amp; Frida Alendal">
+
+<title>Sammenhenger mellom inntekt, alder, kjønn og sivilstatus</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="msb105_assignment2_files/libs/clipboard/clipboard.min.js"></script>
+<script src="msb105_assignment2_files/libs/quarto-html/quarto.js"></script>
+<script src="msb105_assignment2_files/libs/quarto-html/popper.min.js"></script>
+<script src="msb105_assignment2_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="msb105_assignment2_files/libs/quarto-html/anchor.min.js"></script>
+<link href="msb105_assignment2_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="msb105_assignment2_files/libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="msb105_assignment2_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="msb105_assignment2_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="msb105_assignment2_files/libs/bootstrap/bootstrap-c0367b04c37547644fece4185067e4a7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="msb105_assignment2_files/libs/tabwid-1.1.3/tabwid.css" rel="stylesheet">
+<script src="msb105_assignment2_files/libs/tabwid-1.1.3/tabwid.js"></script>
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Sammenhenger mellom inntekt, alder, kjønn og sivilstatus</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Karin Liang, Katinca Valvatne &amp; Frida Alendal </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduksjon" class="level2">
+<h2 class="anchored" data-anchor-id="introduksjon">Introduksjon</h2>
+<p>Hvilke sammenhenger har vi mellom inntekt, alder, kjønn og sivilstatus? I denne presentasjonen undersøker vi disse sammenhengene i datasettet <em>modelr::heights</em>. Tidligere forskning viser at personlige og sosiale kjennetegn ofte henger sammen med økonomisk utbytte. For eksempel finner Judge &amp; Cable (2004) en positiv sammenheng mellom høyde og inntekt, kontrollert for kjønn og alder. Vi vil se om vi kan avdekke lignende mønstre med våre variabler, og hvorvidt kjønn og sivilstatus spiller en rolle for inntektsforskjeller.</p>
+<p>I analysen kombinerer vi beskrivende statistikk og grafer for å identifisere mønstre mellom grupper. For eksempel hvordan menn og kvinner, eller gifte og single, skiller seg i gjennomsnittsinntekt, og om alder modererer disse forskjellene.</p>
+</section>
+<section id="litteraturgjennomgang" class="level2">
+<h2 class="anchored" data-anchor-id="litteraturgjennomgang">Litteraturgjennomgang</h2>
+<p>Flere studier har tidligere undersøkt hvordan demografiske faktorer som kjønn, sivilstatus og alder påvirker individers inntektsnivå. Et gjennomgående funn i forskningen er at både biologiske og sosiale forskjeller skaper systematiske mønstre i økonomisk utbytte.</p>
+<section id="kjønn-og-inntekt" class="level3">
+<h3 class="anchored" data-anchor-id="kjønn-og-inntekt">Kjønn og inntekt</h3>
+<p>Ifølge <span class="citation" data-cites="judge2004">Judge &amp; Cable (<a href="#ref-judge2004" role="doc-biblioref">2004</a>)</span> viser høyde, som ofte er korrelert med maskuline trekk og sosial status, en positiv sammenheng med karrieresuksess og inntekt. Studien fant at høyere personer i snitt tjener mer, også etter kontroll for kjønn, alder og vekt. Sammenhengen mellom høyde og inntekt forklares blant annet gjennom sosiale mekanismer der høyere personer tilskrives større autoritet og selvtillit, noe som igjen påvirker både jobbpresentasjon og lederfremgang. Selv om effekten var sterkere blant menn enn kvinner, var forskjellen ikke statistisk signifikant, noe som antyder at sosiale oppfatninger om status knyttet til fysiske kjennetegn påvirker begge kjønn.</p>
+</section>
+<section id="sivilstatus-og-økonomisk-velstand" class="level3">
+<h3 class="anchored" data-anchor-id="sivilstatus-og-økonomisk-velstand">Sivilstatus og økonomisk velstand</h3>
+<p><span class="citation" data-cites="seeborg2004">Seeborg (<a href="#ref-seeborg2004" role="doc-biblioref">2004</a>)</span> undersøkte effekten av endringer i sivilstatus på levestandard ved å analysere data som fulgte de samme personene over flere år gjennom <em>National Longitudinal Survey of Youth (NLSY)</em>. Studien viser at ekteskap har en positiv effekt på kvinners økonomiske situasjon, mens menn i mindre grad påvirkes. Ved skilsmisse opplever kvinner derimot en betydelig nedgang i sin økonomiske levestandard, mens menn i mange tilfeller opplever en svak økning. Dette forklares gjennom ulik arbeidsdeltakelse, foreldreansvar og kjønnsroller som vedvarer i arbeidsmarkedet. Dermed kan sivilstatus betraktes som en sentral sosial indikator på økonomisk stabilitet, spesielt for kvinner.</p>
+</section>
+<section id="utdanning-kjønn-og-inntektsforskjeller" class="level3">
+<h3 class="anchored" data-anchor-id="utdanning-kjønn-og-inntektsforskjeller">Utdanning, kjønn og inntektsforskjeller</h3>
+<p><span class="citation" data-cites="xie2022">Xie (<a href="#ref-xie2022" role="doc-biblioref">2022</a>)</span> viser at utdanningsnivå har en avgjørende betydning for inntektsnivå, men at kjønnsforskjeller vedvarer selv etter kontroll for utdanning. Menn tjener gjennomgående mer enn kvinner på alle utdanningsnivåer, og dette gapet øker i høyere stillinger. Studien påpeker også at rase og ekteskap påvirker inntekt gjennom sammensatte sosiale mekanismer, der menn oftere drar nytte av tradisjonelle familiemønstre, mens kvinner i større grad bærer økonomiske konsekvenser ved skilsmisse eller delt omsorgsansvar.</p>
+</section>
+<section id="husholdningsstruktur-og-sosioøkonomiske-profiler" class="level3">
+<h3 class="anchored" data-anchor-id="husholdningsstruktur-og-sosioøkonomiske-profiler">Husholdningsstruktur og sosioøkonomiske profiler</h3>
+<p>Den nyere studien <span class="citation" data-cites="mohanneill2014">Mohan-Neill &amp; colleagues (<a href="#ref-mohanneill2014" role="doc-biblioref">2014</a>)</span> undersøker hvordan kombinasjonen av kjønn og sivilstatus påvirker husholdningers økonomiske situasjon i USA. Funnene viser at gifte menn har den høyeste samlede inntekten i familien, mens enslige kvinner, særlig de med barn, befinner seg i den mest økonomisk utsatte gruppen. Studien understreker hvordan kjønn og sivilstatus virker sammen og skaper tydelig mønstre i sosioøkonomisk ulikhet mellom husholdninger.</p>
+</section>
+<section id="alder-og-livsløp" class="level3">
+<h3 class="anchored" data-anchor-id="alder-og-livsløp">Alder og livsløp</h3>
+<p>Flere økonomiske teorier viser at inntekt typisk følger et livsløp der den øker med alder og erfaring frem til et viss punkt før den flater ut. <span class="citation" data-cites="seeborg2004">Seeborg (<a href="#ref-seeborg2004" role="doc-biblioref">2004</a>)</span> kontrollerte for alder i sine regresjonsmodeller og fant en tydelig positiv sammenheng mellom utdanning, alder og inntekt. Dette støtter teorien om at erfaring og utdanning bygges opp over tid og bidrar til høyere økonomisk utbytte.</p>
+</section>
+<section id="samlet-perspektiv" class="level3">
+<h3 class="anchored" data-anchor-id="samlet-perspektiv">Samlet perspektiv</h3>
+<p>Når vi kombinerer funnene fra <span class="citation" data-cites="judge2004">Judge &amp; Cable (<a href="#ref-judge2004" role="doc-biblioref">2004</a>)</span>, <span class="citation" data-cites="seeborg2004">Seeborg (<a href="#ref-seeborg2004" role="doc-biblioref">2004</a>)</span>, <span class="citation" data-cites="xie2022">Xie (<a href="#ref-xie2022" role="doc-biblioref">2022</a>)</span> og <span class="citation" data-cites="mohanneill2014">Mohan-Neill &amp; colleagues (<a href="#ref-mohanneill2014" role="doc-biblioref">2014</a>)</span>, ser vi at inntektforskjeller pårvirkes av både individuelle faktorer (som alder og utdanning) og sosiale faktorer (som kjønn og sivilsatus). Forskningen viser tydelig at kjønn og familieforhold fortsatt har stor betydning for økonomisk velstand, og at effekten av alder og utdanning i mange tilfeller forsterkes eller svekkes av sosiale roller og strukturer. Dette gir et solid teoretisk grunnlag for å analysere sammenhengen mellom inntekt, alder, kjønn og sivilstatus i vårt datasett fra <em>modelr::heights</em>.</p>
+</section>
+</section>
+<section id="description-of-data" class="level2">
+<h2 class="anchored" data-anchor-id="description-of-data">Description of data</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># andre pakker </span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'dplyr'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    filter, lag</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ lubridate 1.9.4     ✔ tibble    3.3.0
+✔ purrr     1.1.0     ✔ tidyr     1.3.1
+✔ readr     2.1.5     </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'scales'
+
+The following object is masked from 'package:purrr':
+
+    discard
+
+The following object is masked from 'package:readr':
+
+    col_factor</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vtable)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: kableExtra
+
+Attaching package: 'kableExtra'
+
+The following object is masked from 'package:dplyr':
+
+    group_rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(flextable)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'flextable'
+
+The following objects are masked from 'package:kableExtra':
+
+    as_image, footnote
+
+The following object is masked from 'package:purrr':
+
+    compose</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># laster inn pakken modelr og datasett heights</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">repos =</span> <span class="fu">c</span>(<span class="at">CRAN =</span> <span class="st">"https://cloud.r-project.org"</span>))</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>pkgs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"modelr"</span>,<span class="st">"dplyr"</span>,<span class="st">"ggplot2"</span>,<span class="st">"scales"</span>,<span class="st">"vtable"</span>,<span class="st">"flextable"</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>to_install <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(pkgs, <span class="fu">rownames</span>(<span class="fu">installed.packages</span>()))</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">length</span>(to_install)) <span class="fu">install.packages</span>(to_install)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(pkgs, library, <span class="at">character.only =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+ [1] "modelr"     "flextable"  "vtable"     "kableExtra" "scales"    
+ [6] "lubridate"  "forcats"    "stringr"    "purrr"      "readr"     
+[11] "tidyr"      "tibble"     "tidyverse"  "ggplot2"    "dplyr"     
+[16] "stats"      "graphics"   "grDevices"  "utils"      "datasets"  
+[21] "methods"    "base"      
+
+[[2]]
+ [1] "modelr"     "flextable"  "vtable"     "kableExtra" "scales"    
+ [6] "lubridate"  "forcats"    "stringr"    "purrr"      "readr"     
+[11] "tidyr"      "tibble"     "tidyverse"  "ggplot2"    "dplyr"     
+[16] "stats"      "graphics"   "grDevices"  "utils"      "datasets"  
+[21] "methods"    "base"      
+
+[[3]]
+ [1] "modelr"     "flextable"  "vtable"     "kableExtra" "scales"    
+ [6] "lubridate"  "forcats"    "stringr"    "purrr"      "readr"     
+[11] "tidyr"      "tibble"     "tidyverse"  "ggplot2"    "dplyr"     
+[16] "stats"      "graphics"   "grDevices"  "utils"      "datasets"  
+[21] "methods"    "base"      
+
+[[4]]
+ [1] "modelr"     "flextable"  "vtable"     "kableExtra" "scales"    
+ [6] "lubridate"  "forcats"    "stringr"    "purrr"      "readr"     
+[11] "tidyr"      "tibble"     "tidyverse"  "ggplot2"    "dplyr"     
+[16] "stats"      "graphics"   "grDevices"  "utils"      "datasets"  
+[21] "methods"    "base"      
+
+[[5]]
+ [1] "modelr"     "flextable"  "vtable"     "kableExtra" "scales"    
+ [6] "lubridate"  "forcats"    "stringr"    "purrr"      "readr"     
+[11] "tidyr"      "tibble"     "tidyverse"  "ggplot2"    "dplyr"     
+[16] "stats"      "graphics"   "grDevices"  "utils"      "datasets"  
+[21] "methods"    "base"      
+
+[[6]]
+ [1] "modelr"     "flextable"  "vtable"     "kableExtra" "scales"    
+ [6] "lubridate"  "forcats"    "stringr"    "purrr"      "readr"     
+[11] "tidyr"      "tibble"     "tidyverse"  "ggplot2"    "dplyr"     
+[16] "stats"      "graphics"   "grDevices"  "utils"      "datasets"  
+[21] "methods"    "base"      </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(modelr)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>heights <span class="ot">&lt;-</span> modelr<span class="sc">::</span>heights</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>heights</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7,006 × 8
+   income height weight   age marital  sex    education  afqt
+    &lt;int&gt;  &lt;dbl&gt;  &lt;int&gt; &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;      &lt;int&gt; &lt;dbl&gt;
+ 1  19000     60    155    53 married  female        13  6.84
+ 2  35000     70    156    51 married  female        10 49.4 
+ 3 105000     65    195    52 married  male          16 99.4 
+ 4  40000     63    197    54 married  female        14 44.0 
+ 5  75000     66    190    49 married  male          14 59.7 
+ 6 102000     68    200    49 divorced female        18 98.8 
+ 7      0     74    225    48 married  male          16 82.3 
+ 8  70000     64    160    54 divorced female        12 50.3 
+ 9  60000     69    162    55 divorced male          12 89.7 
+10 150000     69    194    54 divorced male          13 96.0 
+# ℹ 6,996 more rows</code></pre>
+</div>
+</div>
+<p>Datasettet ‘heights’ som benyttes i denne oppgavaen er hentet fra pakken ‘modelr’.Datasettet inneholder informasjon om enkeltpersoner, og består av 7006 observasjoner og 8 variabler: inntekt, høyde, vekt, alder, sivilstatus, kjønn, utdanningsnivå og AFQT-skår. Variablene omfatter blant annet inntekt (income), alder (age), kjønn (sex) og sivilstatus (marital), som er relevante for denne oppgaven.</p>
+<p>Før analysen ble variablene i datasettet gitt nye navn, og datasettet ble ryddet ved å fjerne observasjoner med manglende verdier (NA) og nullverdier. De resterende observasjonene utgjør grunnlaget for videre analyse.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># rydder datasettet</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># viser struktur av datasettet og summary</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(heights)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [7,006 × 8] (S3: tbl_df/tbl/data.frame)
+ $ income   : int [1:7006] 19000 35000 105000 40000 75000 102000 0 70000 60000 150000 ...
+ $ height   : num [1:7006] 60 70 65 63 66 68 74 64 69 69 ...
+ $ weight   : int [1:7006] 155 156 195 197 190 200 225 160 162 194 ...
+ $ age      : int [1:7006] 53 51 52 54 49 49 48 54 55 54 ...
+ $ marital  : Factor w/ 5 levels "single","married",..: 2 2 2 2 2 4 2 4 4 4 ...
+ $ sex      : Factor w/ 2 levels "male","female": 2 2 1 2 1 2 1 2 1 1 ...
+ $ education: int [1:7006] 13 10 16 14 14 18 16 12 12 13 ...
+ $ afqt     : num [1:7006] 6.84 49.44 99.39 44.02 59.68 ...</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(heights)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     income             height         weight           age       
+ Min.   :     0.0   Min.   :52.0   Min.   : 76.0   Min.   :47.00  
+ 1st Qu.:   165.5   1st Qu.:64.0   1st Qu.:157.0   1st Qu.:49.00  
+ Median : 29589.5   Median :67.0   Median :184.0   Median :51.00  
+ Mean   : 41203.9   Mean   :67.1   Mean   :188.3   Mean   :51.33  
+ 3rd Qu.: 55000.0   3rd Qu.:70.0   3rd Qu.:212.0   3rd Qu.:53.00  
+ Max.   :343830.0   Max.   :84.0   Max.   :524.0   Max.   :56.00  
+                                   NA's   :95                     
+      marital         sex         education          afqt       
+ single   :1124   male  :3402   Min.   : 1.00   Min.   :  0.00  
+ married  :3806   female:3604   1st Qu.:12.00   1st Qu.: 15.12  
+ separated: 366                 Median :12.00   Median : 36.76  
+ divorced :1549                 Mean   :13.22   Mean   : 41.21  
+ widowed  : 161                 3rd Qu.:15.00   3rd Qu.: 65.24  
+                                Max.   :20.00   Max.   :100.00  
+                                NA's   :10      NA's   :262     </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># rename, inntekt, alder, kjonn, sivilstatus</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>heights <span class="ot">&lt;-</span> heights <span class="sc">%&gt;%</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(income, age, sex, marital) <span class="sc">%&gt;%</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">inntekt =</span> income,</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">alder =</span> age,</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">kjonn =</span> sex,</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">sivilstatus =</span> marital</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># fjerner NA-verdi og 0-verdi </span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>    <span class="sc">!</span><span class="fu">is.na</span>(inntekt), <span class="sc">!</span><span class="fu">is.na</span>(alder), <span class="sc">!</span><span class="fu">is.na</span>(kjonn), <span class="sc">!</span><span class="fu">is.na</span>(sivilstatus),</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>    inntekt <span class="sc">&gt;</span> <span class="dv">0</span>,</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>    alder <span class="sc">&gt;</span> <span class="dv">0</span></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a><span class="co"># sjekker igjen struktur og summary</span></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(heights)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [5,266 × 4] (S3: tbl_df/tbl/data.frame)
+ $ inntekt    : int [1:5266] 19000 35000 105000 40000 75000 102000 70000 60000 150000 115000 ...
+ $ alder      : int [1:5266] 53 51 52 54 49 49 54 55 54 53 ...
+ $ kjonn      : Factor w/ 2 levels "male","female": 2 2 1 2 1 2 2 1 1 2 ...
+ $ sivilstatus: Factor w/ 5 levels "single","married",..: 2 2 2 2 2 4 4 4 4 2 ...</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(heights)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    inntekt           alder          kjonn         sivilstatus  
+ Min.   :    45   Min.   :47.00   male  :2657   single   : 710  
+ 1st Qu.: 23425   1st Qu.:49.00   female:2609   married  :3101  
+ Median : 40000   Median :51.00                 separated: 233  
+ Mean   : 54819   Mean   :51.28                 divorced :1115  
+ 3rd Qu.: 65000   3rd Qu.:53.00                 widowed  : 107  
+ Max.   :343830   Max.   :56.00                                 </code></pre>
+</div>
+</div>
+<p>Etter at datasettet ble filtrert og tilpasset analysen, består det nå av 5 266 observasjoner og fire variabler: inntekt, alder, kjønn og sivilstatus.</p>
+<p>Resultatene fra summary viser følgende: Inntekt varierer fra 45 til 343 830 USD, med en median på 40 000 USD og et gjennomsnitt på 54 819 USD. Alder varierer mellom 47 og 56 år, med en median på 51 år. Kjønn er jevnt fordelt, med 2 657 menn og 2 609 kvinner. Sivilstatus viser at flertallet (3 101 personer) er gift, mens 710 er single, 1 115 er skilt, 233 separert og 107 enker/enkemenn.</p>
+<p>Etter rensingen består datasettet dermed av et balansert og ryddig utvalg som danner grunnlaget for videre beskrivelse og analyse av sammenhengen mellom inntekt, alder, kjønn og sivilstatus.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tabell for de to numeriske variablene: inntekt og alder</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>heights <span class="sc">%&gt;%</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(inntekt, alder) <span class="sc">%&gt;%</span>                <span class="co"># Velger kun de numeriske variablene</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  vtable<span class="sc">::</span><span class="fu">st</span>(</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">data   =</span> .,                             <span class="co"># Bruker det nåværende datasettet</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">out    =</span> <span class="st">"return"</span>,                      <span class="co"># Returnerer tabellen i stedet for å skrive den ut</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">inntekt =</span> <span class="st">"Inntekt (USD)"</span>,</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">alder   =</span> <span class="st">"Alder (år)"</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">add.median =</span> <span class="cn">TRUE</span>                       <span class="co"># Legger til median i tabellen</span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_flextable</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autofit</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="tabwid"><style>.cl-3595e356{}.cl-35928f3a{font-family:'Helvetica';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-35928f4e{font-family:'Helvetica';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(153, 153, 153, 1.00);background-color:transparent;}.cl-3593eac4{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-3593f85c{width:1.211in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3593f85d{width:0.922in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3593f85e{width:1.211in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3593f866{width:0.922in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3593f867{width:1.211in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3593f868{width:0.922in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3593f870{width:1.211in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3593f871{width:0.922in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3593f872{width:1.211in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3593f873{width:0.922in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-3595e356"><thead><tr style="overflow-wrap:break-word;"><th class="cl-3593f85c"><p class="cl-3593eac4"><span class="cl-35928f3a">Variable</span></p></th><th class="cl-3593f85d"><p class="cl-3593eac4"><span class="cl-35928f3a">N</span></p></th><th class="cl-3593f85d"><p class="cl-3593eac4"><span class="cl-35928f3a">Mean</span></p></th><th class="cl-3593f85d"><p class="cl-3593eac4"><span class="cl-35928f3a">Std. Dev.</span></p></th><th class="cl-3593f85d"><p class="cl-3593eac4"><span class="cl-35928f3a">Min</span></p></th><th class="cl-3593f85d"><p class="cl-3593eac4"><span class="cl-35928f3a">Pctl. 25</span></p></th><th class="cl-3593f85d"><p class="cl-3593eac4"><span class="cl-35928f3a">Pctl. 50</span></p></th><th class="cl-3593f85d"><p class="cl-3593eac4"><span class="cl-35928f3a">Pctl. 75</span></p></th><th class="cl-3593f85d"><p class="cl-3593eac4"><span class="cl-35928f3a">Max</span></p></th></tr><tr style="overflow-wrap:break-word;"><th class="cl-3593f85e"><p class="cl-3593eac4"><span class="cl-35928f4e">character</span></p></th><th class="cl-3593f866"><p class="cl-3593eac4"><span class="cl-35928f4e">character</span></p></th><th class="cl-3593f866"><p class="cl-3593eac4"><span class="cl-35928f4e">character</span></p></th><th class="cl-3593f866"><p class="cl-3593eac4"><span class="cl-35928f4e">character</span></p></th><th class="cl-3593f866"><p class="cl-3593eac4"><span class="cl-35928f4e">character</span></p></th><th class="cl-3593f866"><p class="cl-3593eac4"><span class="cl-35928f4e">character</span></p></th><th class="cl-3593f866"><p class="cl-3593eac4"><span class="cl-35928f4e">character</span></p></th><th class="cl-3593f866"><p class="cl-3593eac4"><span class="cl-35928f4e">character</span></p></th><th class="cl-3593f866"><p class="cl-3593eac4"><span class="cl-35928f4e">character</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-3593f867"><p class="cl-3593eac4"><span class="cl-35928f3a">Inntekt (USD)</span></p></td><td class="cl-3593f868"><p class="cl-3593eac4"><span class="cl-35928f3a">5266</span></p></td><td class="cl-3593f868"><p class="cl-3593eac4"><span class="cl-35928f3a">54819</span></p></td><td class="cl-3593f868"><p class="cl-3593eac4"><span class="cl-35928f3a">58394</span></p></td><td class="cl-3593f868"><p class="cl-3593eac4"><span class="cl-35928f3a">45</span></p></td><td class="cl-3593f868"><p class="cl-3593eac4"><span class="cl-35928f3a">23425</span></p></td><td class="cl-3593f868"><p class="cl-3593eac4"><span class="cl-35928f3a">40000</span></p></td><td class="cl-3593f868"><p class="cl-3593eac4"><span class="cl-35928f3a">65000</span></p></td><td class="cl-3593f868"><p class="cl-3593eac4"><span class="cl-35928f3a">343830</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-3593f870"><p class="cl-3593eac4"><span class="cl-35928f3a">Alder (år)</span></p></td><td class="cl-3593f871"><p class="cl-3593eac4"><span class="cl-35928f3a">5266</span></p></td><td class="cl-3593f871"><p class="cl-3593eac4"><span class="cl-35928f3a">51</span></p></td><td class="cl-3593f871"><p class="cl-3593eac4"><span class="cl-35928f3a">2.2</span></p></td><td class="cl-3593f871"><p class="cl-3593eac4"><span class="cl-35928f3a">47</span></p></td><td class="cl-3593f871"><p class="cl-3593eac4"><span class="cl-35928f3a">49</span></p></td><td class="cl-3593f871"><p class="cl-3593eac4"><span class="cl-35928f3a">51</span></p></td><td class="cl-3593f871"><p class="cl-3593eac4"><span class="cl-35928f3a">53</span></p></td><td class="cl-3593f871"><p class="cl-3593eac4"><span class="cl-35928f3a">56</span></p></td></tr></tbody><tfoot><tr style="overflow-wrap:break-word;"><td colspan="9" class="cl-3593f872"><p class="cl-3593eac4"><span class="cl-35928f3a">n: 2</span></p></td></tr></tfoot></table></div>
+</div>
+</div>
+<p>Denne tabellen viser en deskriptiv oppsummering av de numeriske variablene i datasettet: inntekt og alder.</p>
+<p>De fleste har moderate inntekter, men noen få med svært høye verdier trekker gjennomsnittet kraftig opp. Aldersspennet er lite, deltakerne er i hovedsak i samme aldersgruppe .</p>
+<p>Tabellresultatene viser at datasettet består av en jevn og homogen gruppe når det gjelder alder, men med stor variasjon i inntektsnivå.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># figur for å beskrive fordeling av inntekt</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>fordeling_inntekt <span class="ot">&lt;-</span> heights <span class="sc">%&gt;%</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> inntekt)) <span class="sc">+</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">10000</span>, <span class="at">fill =</span> <span class="st">"skyblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">350000</span>, <span class="dv">50000</span>),  <span class="co"># Viser et merke for hver 50 000 USD</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">label_number</span>(<span class="at">big.mark =</span> <span class="st">" "</span>, <span class="at">suffix =</span> <span class="st">" USD"</span>)</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Fordeling av inntekt"</span>,</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Årlig inntekt (USD)"</span>,</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Antall personer"</span></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span>      <span class="co"># Større tekst for bedre lesbarhet</span></span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"grey80"</span>, <span class="at">linewidth =</span> <span class="fl">0.6</span>),  <span class="co"># Tydelige hovedrutenettlinjer</span></span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),                            <span class="co"># Fjerner små rutenettlinjer</span></span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)              <span class="co"># Skråstiller teksten på x-aksen for å unngå overlapp</span></span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>fordeling_inntekt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="msb105_assignment2_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Variabelen inntekt representerer den årlige inntekten (målt i USD) for hver observasjon i datasettet.</p>
+<p>Figuren fordeling av inntekt viser hvordan inntekten fordeler seg blant 5 266 personene i datasettet. De fleste observasjonene ligger mellom 20 000 og 80 000 USD, som representerer hovedtyngden av inntektene. Samtidig ser vi at et lite mindretall tjener vesentlig mer enn flertallet. De få personer har svært høye inntekter, helt opp mot over 300 000 USD, noe som trekker gjennomsnittet betydelig opp. Derfor er fordelingen høyreskjev.</p>
+</section>
+<section id="head" class="level1">
+<h1>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Beskrivelse av data(alder)</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>fordeling_alder <span class="ot">&lt;-</span> heights <span class="sc">%&gt;%</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> alder)) <span class="sc">+</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">fill =</span> <span class="st">"mediumaquamarine"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">45</span>, <span class="dv">60</span>, <span class="dv">1</span>)</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Fordeling av alder"</span>,</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Alder (år)"</span>,</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Antall personer"</span></span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"grey80"</span>, <span class="at">linewidth =</span> <span class="fl">0.6</span>),</span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)</span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>fordeling_alder</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="msb105_assignment2_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># &gt;&gt;&gt;&gt;&gt;&gt;&gt; Introduksjon</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Variabelen alder viser deltakernes alder målt i hele år.</p>
+<p>Figuren fordeling av kjønn viser at aldersfordelingen mellom 47 til 56 år, er jevn og konsentrert innenfor et smalt intervall. De fleste observasjonene ligger mellom 49 og 53 år, med en gjennomsnittsalder på omtrent 51 år. Aldersspennet er lite, noe som betyr at de fleste personene i datasettet er omtrent like gamle.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tabell for de to kategoriske variablene: sivilstatus og kjønn</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>heights <span class="sc">%&gt;%</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(sivilstatus, kjonn) <span class="sc">%&gt;%</span>            <span class="co"># Velger kun de kategoriske variablene</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  vtable<span class="sc">::</span><span class="fu">st</span>(</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> ., </span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">out =</span> <span class="st">"return"</span>,                         <span class="co"># Returnerer tabellen som et objekt</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">sivilstatus =</span> <span class="st">"Sivilstatus"</span>,</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">kjonn =</span> <span class="st">"Kjønn"</span></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_flextable</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autofit</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="tabwid"><style>.cl-35cbcef8{}.cl-35c8c1ea{font-family:'Helvetica';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-35c8c1f4{font-family:'Helvetica';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(153, 153, 153, 1.00);background-color:transparent;}.cl-35c9ff74{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-35ca0cbc{width:1.134in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-35ca0cc6{width:0.922in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-35ca0cc7{width:1.134in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-35ca0cc8{width:0.922in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-35ca0cd0{width:1.134in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-35ca0cd1{width:0.922in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-35ca0cda{width:1.134in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-35ca0cdb{width:0.922in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-35ca0cdc{width:1.134in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-35ca0cdd{width:0.922in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-35ca0ce4{width:1.134in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-35ca0ce5{width:0.922in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-35ca0ce6{width:1.134in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-35ca0ce7{width:0.922in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-35ca0cee{width:1.134in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-35ca0cef{width:0.922in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-35ca0cf0{width:1.134in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-35ca0cf8{width:0.922in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-35ca0cf9{width:1.134in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-35ca0cfa{width:0.922in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-35cbcef8"><thead><tr style="overflow-wrap:break-word;"><th class="cl-35ca0cbc"><p class="cl-35c9ff74"><span class="cl-35c8c1ea">Variable</span></p></th><th class="cl-35ca0cc6"><p class="cl-35c9ff74"><span class="cl-35c8c1ea">N</span></p></th><th class="cl-35ca0cc6"><p class="cl-35c9ff74"><span class="cl-35c8c1ea">Percent</span></p></th></tr><tr style="overflow-wrap:break-word;"><th class="cl-35ca0cc7"><p class="cl-35c9ff74"><span class="cl-35c8c1f4">character</span></p></th><th class="cl-35ca0cc8"><p class="cl-35c9ff74"><span class="cl-35c8c1f4">character</span></p></th><th class="cl-35ca0cc8"><p class="cl-35c9ff74"><span class="cl-35c8c1f4">character</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-35ca0cd0"><p class="cl-35c9ff74"><span class="cl-35c8c1ea">Sivilstatus</span></p></td><td class="cl-35ca0cd1"><p class="cl-35c9ff74"><span class="cl-35c8c1ea">5266</span></p></td><td class="cl-35ca0cd1"><p class="cl-35c9ff74"><span class="cl-35c8c1ea"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-35ca0cda"><p class="cl-35c9ff74"><span class="cl-35c8c1ea">... single</span></p></td><td class="cl-35ca0cdb"><p class="cl-35c9ff74"><span class="cl-35c8c1ea">710</span></p></td><td class="cl-35ca0cdb"><p class="cl-35c9ff74"><span class="cl-35c8c1ea">13%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-35ca0cdc"><p class="cl-35c9ff74"><span class="cl-35c8c1ea">... married</span></p></td><td class="cl-35ca0cdd"><p class="cl-35c9ff74"><span class="cl-35c8c1ea">3101</span></p></td><td class="cl-35ca0cdd"><p class="cl-35c9ff74"><span class="cl-35c8c1ea">59%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-35ca0ce4"><p class="cl-35c9ff74"><span class="cl-35c8c1ea">... separated</span></p></td><td class="cl-35ca0ce5"><p class="cl-35c9ff74"><span class="cl-35c8c1ea">233</span></p></td><td class="cl-35ca0ce5"><p class="cl-35c9ff74"><span class="cl-35c8c1ea">4%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-35ca0ce6"><p class="cl-35c9ff74"><span class="cl-35c8c1ea">... divorced</span></p></td><td class="cl-35ca0ce7"><p class="cl-35c9ff74"><span class="cl-35c8c1ea">1115</span></p></td><td class="cl-35ca0ce7"><p class="cl-35c9ff74"><span class="cl-35c8c1ea">21%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-35ca0ce6"><p class="cl-35c9ff74"><span class="cl-35c8c1ea">... widowed</span></p></td><td class="cl-35ca0ce7"><p class="cl-35c9ff74"><span class="cl-35c8c1ea">107</span></p></td><td class="cl-35ca0ce7"><p class="cl-35c9ff74"><span class="cl-35c8c1ea">2%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-35ca0ce4"><p class="cl-35c9ff74"><span class="cl-35c8c1ea">Kjønn</span></p></td><td class="cl-35ca0ce5"><p class="cl-35c9ff74"><span class="cl-35c8c1ea">5266</span></p></td><td class="cl-35ca0ce5"><p class="cl-35c9ff74"><span class="cl-35c8c1ea"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-35ca0cee"><p class="cl-35c9ff74"><span class="cl-35c8c1ea">... male</span></p></td><td class="cl-35ca0cef"><p class="cl-35c9ff74"><span class="cl-35c8c1ea">2657</span></p></td><td class="cl-35ca0cef"><p class="cl-35c9ff74"><span class="cl-35c8c1ea">50%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-35ca0cf0"><p class="cl-35c9ff74"><span class="cl-35c8c1ea">... female</span></p></td><td class="cl-35ca0cf8"><p class="cl-35c9ff74"><span class="cl-35c8c1ea">2609</span></p></td><td class="cl-35ca0cf8"><p class="cl-35c9ff74"><span class="cl-35c8c1ea">50%</span></p></td></tr></tbody><tfoot><tr style="overflow-wrap:break-word;"><td colspan="3" class="cl-35ca0cf9"><p class="cl-35c9ff74"><span class="cl-35c8c1ea">n: 9</span></p></td></tr></tfoot></table></div>
+</div>
+</div>
+<p>Denne tabellen viser en deskriptiv oppsummering av de kategoriske variablene i datasettet: sivilstatus og kjønn.</p>
+<p>Flertallet av personene i datasettet er gift (married) — rundt 59 % av utvalget (3 101 personer). 710 personer (13 %) er single, mens 1 115 (21 %) er skilt (divorced). De resterende er separert (233 personer) og enkemann/enke (107 personer).</p>
+<p>Fordelingen mellom kjønn er nesten helt jevn, med 2 657 menn (50,5 %) og 2 609 kvinner (49,5 %).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tabell: Beskrivende statistikk for inntekt og alder etter kjønn</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>heights <span class="sc">%&gt;%</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(kjonn, inntekt, alder) <span class="sc">%&gt;%</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  vtable<span class="sc">::</span><span class="fu">st</span>(</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">group =</span> <span class="st">"kjonn"</span>,</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">group.long =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">inntekt =</span> <span class="st">"Inntekt (USD)"</span>,</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">alder   =</span> <span class="st">"Alder (år)"</span></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">out =</span> <span class="st">"return"</span></span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_flextable</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autofit</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="tabwid"><style>.cl-35e61452{}.cl-35e2e41c{font-family:'Helvetica';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-35e2e426{font-family:'Helvetica';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(153, 153, 153, 1.00);background-color:transparent;}.cl-35e42962{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-35e4365a{width:1.211in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-35e43664{width:0.922in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-35e43665{width:1.211in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-35e43666{width:0.922in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-35e4366e{width:1.211in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-35e4366f{width:0.922in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-35e43670{width:1.211in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-35e43678{width:0.922in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-35e43679{width:1.211in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-35e4367a{width:0.922in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-35e43682{width:1.211in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-35e43683{width:0.922in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-35e43684{width:1.211in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-35e4368c{width:0.922in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-35e4368d{width:1.211in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-35e4368e{width:0.922in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-35e43696{width:1.211in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-35e43697{width:0.922in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-35e61452"><thead><tr style="overflow-wrap:break-word;"><th class="cl-35e4365a"><p class="cl-35e42962"><span class="cl-35e2e41c">Variable</span></p></th><th class="cl-35e43664"><p class="cl-35e42962"><span class="cl-35e2e41c">N</span></p></th><th class="cl-35e43664"><p class="cl-35e42962"><span class="cl-35e2e41c">Mean</span></p></th><th class="cl-35e43664"><p class="cl-35e42962"><span class="cl-35e2e41c">Std. Dev.</span></p></th><th class="cl-35e43664"><p class="cl-35e42962"><span class="cl-35e2e41c">Min</span></p></th><th class="cl-35e43664"><p class="cl-35e42962"><span class="cl-35e2e41c">Pctl. 25</span></p></th><th class="cl-35e43664"><p class="cl-35e42962"><span class="cl-35e2e41c">Pctl. 75</span></p></th><th class="cl-35e43664"><p class="cl-35e42962"><span class="cl-35e2e41c">Max</span></p></th></tr><tr style="overflow-wrap:break-word;"><th class="cl-35e43665"><p class="cl-35e42962"><span class="cl-35e2e426">character</span></p></th><th class="cl-35e43666"><p class="cl-35e42962"><span class="cl-35e2e426">character</span></p></th><th class="cl-35e43666"><p class="cl-35e42962"><span class="cl-35e2e426">character</span></p></th><th class="cl-35e43666"><p class="cl-35e42962"><span class="cl-35e2e426">character</span></p></th><th class="cl-35e43666"><p class="cl-35e42962"><span class="cl-35e2e426">character</span></p></th><th class="cl-35e43666"><p class="cl-35e42962"><span class="cl-35e2e426">character</span></p></th><th class="cl-35e43666"><p class="cl-35e42962"><span class="cl-35e2e426">character</span></p></th><th class="cl-35e43666"><p class="cl-35e42962"><span class="cl-35e2e426">character</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-35e4366e"><p class="cl-35e42962"><span class="cl-35e2e41c">kjonn: male</span></p></td><td class="cl-35e4366f"><p class="cl-35e42962"><span class="cl-35e2e41c"></span></p></td><td class="cl-35e4366f"><p class="cl-35e42962"><span class="cl-35e2e41c"></span></p></td><td class="cl-35e4366f"><p class="cl-35e42962"><span class="cl-35e2e41c"></span></p></td><td class="cl-35e4366f"><p class="cl-35e42962"><span class="cl-35e2e41c"></span></p></td><td class="cl-35e4366f"><p class="cl-35e42962"><span class="cl-35e2e41c"></span></p></td><td class="cl-35e4366f"><p class="cl-35e42962"><span class="cl-35e2e41c"></span></p></td><td class="cl-35e4366f"><p class="cl-35e42962"><span class="cl-35e2e41c"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-35e43670"><p class="cl-35e42962"><span class="cl-35e2e41c">Inntekt (USD)</span></p></td><td class="cl-35e43678"><p class="cl-35e42962"><span class="cl-35e2e41c">2657</span></p></td><td class="cl-35e43678"><p class="cl-35e42962"><span class="cl-35e2e41c">68514</span></p></td><td class="cl-35e43678"><p class="cl-35e42962"><span class="cl-35e2e41c">71686</span></p></td><td class="cl-35e43678"><p class="cl-35e42962"><span class="cl-35e2e41c">72</span></p></td><td class="cl-35e43678"><p class="cl-35e42962"><span class="cl-35e2e41c">30000</span></p></td><td class="cl-35e43678"><p class="cl-35e42962"><span class="cl-35e2e41c">80000</span></p></td><td class="cl-35e43678"><p class="cl-35e42962"><span class="cl-35e2e41c">343830</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-35e43679"><p class="cl-35e42962"><span class="cl-35e2e41c">Alder (år)</span></p></td><td class="cl-35e4367a"><p class="cl-35e42962"><span class="cl-35e2e41c">2657</span></p></td><td class="cl-35e4367a"><p class="cl-35e42962"><span class="cl-35e2e41c">51</span></p></td><td class="cl-35e4367a"><p class="cl-35e42962"><span class="cl-35e2e41c">2.2</span></p></td><td class="cl-35e4367a"><p class="cl-35e42962"><span class="cl-35e2e41c">47</span></p></td><td class="cl-35e4367a"><p class="cl-35e42962"><span class="cl-35e2e41c">49</span></p></td><td class="cl-35e4367a"><p class="cl-35e42962"><span class="cl-35e2e41c">53</span></p></td><td class="cl-35e4367a"><p class="cl-35e42962"><span class="cl-35e2e41c">56</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-35e43682"><p class="cl-35e42962"><span class="cl-35e2e41c"></span></p></td><td class="cl-35e43683"><p class="cl-35e42962"><span class="cl-35e2e41c"></span></p></td><td class="cl-35e43683"><p class="cl-35e42962"><span class="cl-35e2e41c"></span></p></td><td class="cl-35e43683"><p class="cl-35e42962"><span class="cl-35e2e41c"></span></p></td><td class="cl-35e43683"><p class="cl-35e42962"><span class="cl-35e2e41c"></span></p></td><td class="cl-35e43683"><p class="cl-35e42962"><span class="cl-35e2e41c"></span></p></td><td class="cl-35e43683"><p class="cl-35e42962"><span class="cl-35e2e41c"></span></p></td><td class="cl-35e43683"><p class="cl-35e42962"><span class="cl-35e2e41c"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-35e43684"><p class="cl-35e42962"><span class="cl-35e2e41c">kjonn: female</span></p></td><td class="cl-35e4368c"><p class="cl-35e42962"><span class="cl-35e2e41c"></span></p></td><td class="cl-35e4368c"><p class="cl-35e42962"><span class="cl-35e2e41c"></span></p></td><td class="cl-35e4368c"><p class="cl-35e42962"><span class="cl-35e2e41c"></span></p></td><td class="cl-35e4368c"><p class="cl-35e42962"><span class="cl-35e2e41c"></span></p></td><td class="cl-35e4368c"><p class="cl-35e42962"><span class="cl-35e2e41c"></span></p></td><td class="cl-35e4368c"><p class="cl-35e42962"><span class="cl-35e2e41c"></span></p></td><td class="cl-35e4368c"><p class="cl-35e42962"><span class="cl-35e2e41c"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-35e43670"><p class="cl-35e42962"><span class="cl-35e2e41c">Inntekt (USD)</span></p></td><td class="cl-35e43678"><p class="cl-35e42962"><span class="cl-35e2e41c">2609</span></p></td><td class="cl-35e43678"><p class="cl-35e42962"><span class="cl-35e2e41c">40871</span></p></td><td class="cl-35e43678"><p class="cl-35e42962"><span class="cl-35e2e41c">35563</span></p></td><td class="cl-35e43678"><p class="cl-35e42962"><span class="cl-35e2e41c">45</span></p></td><td class="cl-35e43678"><p class="cl-35e42962"><span class="cl-35e2e41c">19000</span></p></td><td class="cl-35e43678"><p class="cl-35e42962"><span class="cl-35e2e41c">54000</span></p></td><td class="cl-35e43678"><p class="cl-35e42962"><span class="cl-35e2e41c">343830</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-35e4368d"><p class="cl-35e42962"><span class="cl-35e2e41c">Alder (år)</span></p></td><td class="cl-35e4368e"><p class="cl-35e42962"><span class="cl-35e2e41c">2609</span></p></td><td class="cl-35e4368e"><p class="cl-35e42962"><span class="cl-35e2e41c">51</span></p></td><td class="cl-35e4368e"><p class="cl-35e42962"><span class="cl-35e2e41c">2.2</span></p></td><td class="cl-35e4368e"><p class="cl-35e42962"><span class="cl-35e2e41c">47</span></p></td><td class="cl-35e4368e"><p class="cl-35e42962"><span class="cl-35e2e41c">49</span></p></td><td class="cl-35e4368e"><p class="cl-35e42962"><span class="cl-35e2e41c">53</span></p></td><td class="cl-35e4368e"><p class="cl-35e42962"><span class="cl-35e2e41c">56</span></p></td></tr></tbody><tfoot><tr style="overflow-wrap:break-word;"><td colspan="8" class="cl-35e43696"><p class="cl-35e42962"><span class="cl-35e2e41c">n: 7</span></p></td></tr></tfoot></table></div>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># figure </span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>fordeling_kjonn <span class="ot">&lt;-</span> heights <span class="sc">%&gt;%</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> kjonn)) <span class="sc">+</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"sandybrown"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_text</span>(</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">stat =</span> <span class="st">"count"</span>,</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">label =</span> ..count..),</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.3</span>,           <span class="co"># Tekst som vises over kolonnen</span></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">2</span>,               <span class="co"># Skriftstørrelse</span></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"black"</span>         <span class="co"># Skriftfarge</span></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Fordeling av kjønn"</span>,</span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Kjønn"</span>,</span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Antall personer"</span></span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"grey80"</span>, <span class="at">linewidth =</span> <span class="fl">0.6</span>),</span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a>fordeling_kjonn</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: The dot-dot notation (`..count..`) was deprecated in ggplot2 3.4.0.
+ℹ Please use `after_stat(count)` instead.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="msb105_assignment2_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Variabelen kjønn beskriver fordelingen mellom menn og kvinner i datasettet.</p>
+<p>Figuren fordeling av kjønn viser at kjønnsfordelingen av 5 266 observasjonene i datasettet er nesten helt balansert. Av de 5 266 observasjonene er det 2 657 menn og 2 609 kvinner. Forskjellen mellom gruppene er dermed svært liten, noe som betyr at analysen ikke vil være skjev med hensyn til kjønn.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tabell: Beskrivende statistikk for inntekt og alder etter sivilstatus (Gift vs. Ikke gift)</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressWarnings</span>({</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  heights <span class="sc">%&gt;%</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">sivilgruppe =</span> <span class="fu">if_else</span>(sivilstatus <span class="sc">==</span> <span class="st">"married"</span>, <span class="st">"Gift"</span>, <span class="st">"Ikke gift"</span>),</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">sivilgruppe =</span> <span class="fu">as.character</span>(sivilgruppe)   <span class="co"># konvertert til tekst</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(sivilgruppe, inntekt, alder) <span class="sc">%&gt;%</span></span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>    vtable<span class="sc">::</span><span class="fu">st</span>(</span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">group      =</span> <span class="st">"sivilgruppe"</span>,</span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">group.long =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">summ       =</span> <span class="fu">c</span>(<span class="st">"notNA(x)"</span>, <span class="st">"mean(x)"</span>, <span class="st">"sd(x)"</span>),</span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">summ.names =</span> <span class="fu">c</span>(<span class="st">"N"</span>, <span class="st">"Mean"</span>, <span class="st">"SD"</span>),</span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels     =</span> <span class="fu">c</span>(</span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">inntekt =</span> <span class="st">"Inntekt (USD)"</span>,</span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">alder   =</span> <span class="st">"Alder (år)"</span></span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">out        =</span> <span class="st">"return"</span></span>
+<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_flextable</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set_caption</span>(<span class="st">"Tabell X. Beskrivende statistikk for inntekt og alder etter sivilstatus (Gift vs. Ikke gift)"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">autofit</span>()</span>
+<span id="cb34-24"><a href="#cb34-24" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="tabwid"><style>.cl-36093dd8{}.cl-3605c0ae{font-family:'Helvetica';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-3605c0b8{font-family:'Helvetica';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(153, 153, 153, 1.00);background-color:transparent;}.cl-36070086{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-36070d7e{width:1.627in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-36070d7f{width:0.922in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-36070d88{width:1.627in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-36070d89{width:0.922in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-36070d8a{width:1.627in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-36070d92{width:0.922in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-36070d93{width:1.627in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-36070d94{width:0.922in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-36070d9c{width:1.627in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-36070d9d{width:0.922in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-36070d9e{width:1.627in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-36070d9f{width:0.922in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-36070da6{width:1.627in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-36070da7{width:0.922in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-36070da8{width:1.627in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-36070da9{width:0.922in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-36070daa{width:1.627in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-36070db0{width:0.922in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-36093dd8"><thead><tr style="overflow-wrap:break-word;"><th class="cl-36070d7e"><p class="cl-36070086"><span class="cl-3605c0ae">Variable</span></p></th><th class="cl-36070d7f"><p class="cl-36070086"><span class="cl-3605c0ae">N</span></p></th><th class="cl-36070d7f"><p class="cl-36070086"><span class="cl-3605c0ae">Mean</span></p></th><th class="cl-36070d7f"><p class="cl-36070086"><span class="cl-3605c0ae">SD</span></p></th></tr><tr style="overflow-wrap:break-word;"><th class="cl-36070d88"><p class="cl-36070086"><span class="cl-3605c0b8">character</span></p></th><th class="cl-36070d89"><p class="cl-36070086"><span class="cl-3605c0b8">character</span></p></th><th class="cl-36070d89"><p class="cl-36070086"><span class="cl-3605c0b8">character</span></p></th><th class="cl-36070d89"><p class="cl-36070086"><span class="cl-3605c0b8">character</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-36070d8a"><p class="cl-36070086"><span class="cl-3605c0ae">sivilgruppe: Gift</span></p></td><td class="cl-36070d92"><p class="cl-36070086"><span class="cl-3605c0ae"></span></p></td><td class="cl-36070d92"><p class="cl-36070086"><span class="cl-3605c0ae"></span></p></td><td class="cl-36070d92"><p class="cl-36070086"><span class="cl-3605c0ae"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-36070d93"><p class="cl-36070086"><span class="cl-3605c0ae">Inntekt (USD)</span></p></td><td class="cl-36070d94"><p class="cl-36070086"><span class="cl-3605c0ae">3101</span></p></td><td class="cl-36070d94"><p class="cl-36070086"><span class="cl-3605c0ae">62931</span></p></td><td class="cl-36070d94"><p class="cl-36070086"><span class="cl-3605c0ae">65476</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-36070d9c"><p class="cl-36070086"><span class="cl-3605c0ae">Alder (år)</span></p></td><td class="cl-36070d9d"><p class="cl-36070086"><span class="cl-3605c0ae">3101</span></p></td><td class="cl-36070d9d"><p class="cl-36070086"><span class="cl-3605c0ae">51</span></p></td><td class="cl-36070d9d"><p class="cl-36070086"><span class="cl-3605c0ae">2.2</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-36070d9e"><p class="cl-36070086"><span class="cl-3605c0ae"></span></p></td><td class="cl-36070d9f"><p class="cl-36070086"><span class="cl-3605c0ae"></span></p></td><td class="cl-36070d9f"><p class="cl-36070086"><span class="cl-3605c0ae"></span></p></td><td class="cl-36070d9f"><p class="cl-36070086"><span class="cl-3605c0ae"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-36070da6"><p class="cl-36070086"><span class="cl-3605c0ae">sivilgruppe: Ikke gift</span></p></td><td class="cl-36070da7"><p class="cl-36070086"><span class="cl-3605c0ae"></span></p></td><td class="cl-36070da7"><p class="cl-36070086"><span class="cl-3605c0ae"></span></p></td><td class="cl-36070da7"><p class="cl-36070086"><span class="cl-3605c0ae"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-36070d93"><p class="cl-36070086"><span class="cl-3605c0ae">Inntekt (USD)</span></p></td><td class="cl-36070d94"><p class="cl-36070086"><span class="cl-3605c0ae">2165</span></p></td><td class="cl-36070d94"><p class="cl-36070086"><span class="cl-3605c0ae">43199</span></p></td><td class="cl-36070d94"><p class="cl-36070086"><span class="cl-3605c0ae">43880</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-36070da8"><p class="cl-36070086"><span class="cl-3605c0ae">Alder (år)</span></p></td><td class="cl-36070da9"><p class="cl-36070086"><span class="cl-3605c0ae">2165</span></p></td><td class="cl-36070da9"><p class="cl-36070086"><span class="cl-3605c0ae">51</span></p></td><td class="cl-36070da9"><p class="cl-36070086"><span class="cl-3605c0ae">2.2</span></p></td></tr></tbody><tfoot><tr style="overflow-wrap:break-word;"><td colspan="4" class="cl-36070daa"><p class="cl-36070086"><span class="cl-3605c0ae">n: 7</span></p></td></tr></tfoot></table></div>
+</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># figure</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>fordeling_sivilstatus <span class="ot">&lt;-</span> heights <span class="sc">%&gt;%</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sivilstatus)) <span class="sc">+</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"tomato"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_text</span>(</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">stat =</span> <span class="st">"count"</span>,</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">label =</span> ..count..),</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.3</span>,           <span class="co"># Tekst som vises over kolonnen</span></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">2</span>,               <span class="co"># Skriftstørrelse</span></span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"black"</span>         <span class="co"># Skriftfarge</span></span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Fordeling av sivilstatus"</span>,</span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Sivilstatus"</span>,</span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Antall personer"</span></span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"grey80"</span>, <span class="at">linewidth =</span> <span class="fl">0.6</span>),</span>
+<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">30</span>, <span class="at">hjust =</span> <span class="dv">1</span>)</span>
+<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb35-23"><a href="#cb35-23" aria-hidden="true" tabindex="-1"></a>fordeling_sivilstatus</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="msb105_assignment2_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Variabelen sivilstatus viser 5266 deltakernes ekteskapsstatus og består av fem kategorier: single, married, separated, divorced og widowed.<br>
+Figuren fordeling av sivilstatus viser hvordan observasjonene fordeler seg mellom disse gruppene.</p>
+<p>Det fremgår tydelig at flertallet av personene er gift (married), med 3 101 observasjoner, noe som utgjør nærmere 59 prosent av utvalget. Videre er 1 115 personer skilt (divorced) og 710 single (never married), mens kategoriene separated (233) og widowed (107) utgjør en mindre andel.</p>
+<p>Fordelingen av sivilstatus viser dermed et mønster som er vanlig i voksenbefolkningen, der de fleste er gift eller tidligere gift.</p>
+<section id="analysis" class="level2">
+<h2 class="anchored" data-anchor-id="analysis">Analysis</h2>
+</section>
+<section id="results" class="level2">
+<h2 class="anchored" data-anchor-id="results">Results</h2>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+</section>
+<section id="references" class="level2 unnumbered">
+
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-judge2004" class="csl-entry" role="listitem">
+Judge, T. A. &amp; Cable, D. M. (2004). The effect of physical height on workplace success and income: Preliminary test of a theoretical model. <em>Journal of Applied Psychology</em>, <em>89</em>(3), 428–441. <a href="https://doi.org/10.1037/0021-9010.89.3.428">https://doi.org/10.1037/0021-9010.89.3.428</a>
+</div>
+<div id="ref-mohanneill2014" class="csl-entry" role="listitem">
+Mohan-Neill, S. T. &amp; colleagues. (2014). An analysis of US household socioeconomic profiles based on marital status and gender. <em>Academy of Accounting and Financial Studies Journal</em>, <em>18</em>(3), 63–76.
+</div>
+<div id="ref-seeborg2004" class="csl-entry" role="listitem">
+Seeborg, M. C. (2004). The effect of marital status on the relative standard of living of young men and young women. <em>Journal of Business and Economics Research</em>, <em>2</em>(1), 65–80.
+</div>
+<div id="ref-xie2022" class="csl-entry" role="listitem">
+Xie, R. (2022). The influence of education level, gender, race, marital status, age, and occupation on the wage of the general population. <em>Proceedings of the 7th International Conference on Social Sciences and Economic Development (ICSSED 2022)</em>. <a href="https://doi.org/10.2991/assehr.k.220405.155">https://doi.org/10.2991/assehr.k.220405.155</a>
+</div>
+</div></section></div></main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
