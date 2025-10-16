@@ -52,8 +52,7 @@ Når vi kombinerer funnene fra @judge2004, @seeborg2004, @xie2022 og @mohanneill
 
 ## Description of data
 ::: incremental
--   Første punkt
-    - laster inn og rydder datassettet 'heights'
+-   Første punkt, laster inn og rydder datassettet 'heights'
     
 ### Laster inn og rydder datassettet 'heights' 
 ```{r}
@@ -112,8 +111,7 @@ Resultatene fra summary viser følgende: Inntekt varierer fra 45 til 343 830 USD
 
 Etter rensingen består datasettet dermed av et balansert og ryddig utvalg som danner grunnlaget for videre beskrivelse og analyse av sammenhengen mellom inntekt, alder, kjønn og sivilstatus.
 
--   Andre punkt
-    - beskrivelse av data
+-   Andre punkt, beskrivelse av data
     
 ### beskriver variabler inntekt og alder
 ```{r}
@@ -191,6 +189,8 @@ fordeling_alder
 Variabelen alder viser deltakernes alder målt i hele år.
 
 Figuren fordeling av alder viser at aldersfordelingen mellom 47 til 56 år, er jevn og konsentrert innenfor et smalt intervall. De fleste observasjonene ligger mellom 48 og 55 år.Det er få personer som er 47 eller 56 år. Aldersspennet er lite, noe som betyr at de fleste personene i datasettet er omtrent like gamle. 
+
+-   Tredje punkt, beskriver variabler sivilstatus og kjønn
 
 ### beskriver variabler sivilstatus og kjønn
 ```{r}
@@ -318,9 +318,8 @@ Fordelingen av sivilstatus viser dermed et mønster som er vanlig i voksenbefolk
 ## Analysis
 
 ::: incremental
--   Første punkt 
-    -Sammenhengen mellom inntekt og alder
-
+-   Første punkt, Sammenhengen mellom inntekt og alder
+    
 ### Sammenhengen mellom inntekt og alder
 ```{r}
 # figuren for sammenhengen mellom inntekt og alder
@@ -372,8 +371,7 @@ summary(regresjon_alder)
  
 ```
 
--   Andre punkt
-    - Sammenhengen mellom inntekt og kjønn
+-   Andre punkt, Sammenhengen mellom inntekt og kjønn
 
 ### Sammenhengen mellom inntekt og kjønn
 ```{r}
@@ -407,8 +405,7 @@ summary(regresjon_kjonn)
 ```
 
 
--   Tredje punkt
-    - Sammenhengen mellom inntekt og sivilstatus
+-   Tredje punkt, Sammenhengen mellom inntekt og sivilstatus
     
 ### Sammenhengen mellom inntekt og sivilstatus
 ```{r}
