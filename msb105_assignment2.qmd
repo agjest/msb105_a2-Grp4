@@ -11,7 +11,7 @@ theme: simple
 
 ## Introduksjon
 
-Hvilke sammenhenger har vi mellom inntekt, alder, kjønn og sivilstatus? I denne presentasjonen undersøker vi disse sammenhengene i datasettet *modelr::heights*. Tidligere forskning viser at personlige og sosiale kjennetegn ofte henger sammen med økonomisk utbytte. For eksempel finner Judge & Cable (2004) en positiv sammenheng mellom høyde og inntekt, kontrollert for kjønn og alder. Vi vil se om vi kan avdekke lignende mønstre med våre variabler, og hvorvidt kjønn og sivilstatus spiller en rolle for inntektsforskjeller. 
+Hvilke sammenhenger har vi mellom inntekt, alder, kjønn og sivilstatus? I denne presentasjonen undersøker vi disse sammenhengene i datasettet *modelr::heights*. Tidligere forskning viser at personlige og sosiale kjennetegn ofte henger sammen med økonomisk utbytte. For eksempel finner Judge & Cable (2004) en positiv sammenheng mellom høyde og inntekt, kontrollert for kjønn og alder. Vi vil se om vi kan avdekke lignende mønstre med våre variabler, og hvorvidt kjønn og sivilstatus spiller en rolle for inntektsforskjeller.
 
 I analysen kombinerer vi beskrivende statistikk og grafer for å identifisere mønstre mellom grupper. For eksempel hvordan menn og kvinner, eller gifte og single, skiller seg i gjennomsnittsinntekt, og om alder modererer disse forskjellene.
 
@@ -41,9 +41,7 @@ Når vi kombinerer funnene fra @judge2004, @seeborg2004, @xie2022 og @mohanneill
 ## Description of data
 
 ```{r}
-
 # andre pakker 
-
 library(dplyr)
 library(ggplot2)
 library(tidyverse)
@@ -154,8 +152,7 @@ Variabelen inntekt representerer den årlige inntekten (målt i USD) for hver ob
 
 Figuren fordeling av inntekt viser hvordan inntekten fordeler seg blant 5 266 personene i datasettet. De fleste observasjonene ligger mellom 20 000 og 80 000 USD, som representerer hovedtyngden av inntektene. Samtidig ser vi at et lite mindretall tjener vesentlig mer enn flertallet. De få personer har svært høye inntekter, helt opp mot over 300 000 USD, noe som trekker gjennomsnittet betydelig opp. Derfor er fordelingen høyreskjev.
 
-<<<<<<< HEAD
-=======
+
 ```{r}
 # Beskrivelse av data(alder)
 
@@ -172,13 +169,12 @@ fordeling_alder <- heights %>%
   ) +
   theme_minimal(base_size = 14) +
   theme(
-    panel.grid.major = element_line(color = "grey80", linewidth = 0.6),
+    panel.grid.major = element_line(color = "grey80", size = 0.6),
     panel.grid.minor = element_blank(),
     axis.text.x = element_text(angle = 45, hjust = 1)
   )
 fordeling_alder
 
-# >>>>>>> Introduksjon
 ```
 
 Variabelen alder viser deltakernes alder målt i hele år.
@@ -206,6 +202,10 @@ Denne tabellen viser en deskriptiv oppsummering av de kategoriske variablene i d
 Flertallet av personene i datasettet er gift (married) — rundt 59 % av utvalget (3 101 personer). 710 personer (13 %) er single, mens 1 115 (21 %) er skilt (divorced). De resterende er separert (233 personer) og enkemann/enke (107 personer).
 
 Fordelingen mellom kjønn er nesten helt jevn, med 2 657 menn (50,5 %) og 2 609 kvinner (49,5 %).
+
+
+
+
 
 ```{r}
 # Tabell: Beskrivende statistikk for inntekt og alder etter kjønn
@@ -242,7 +242,7 @@ fordeling_kjonn <- heights %>%
   ) +
   theme_minimal(base_size = 14) +
   theme(
-    panel.grid.major = element_line(color = "grey80", linewidth = 0.6),
+    panel.grid.major = element_line(color = "grey80", size = 0.6),
     panel.grid.minor = element_blank()
   )
 fordeling_kjonn
@@ -251,7 +251,7 @@ fordeling_kjonn
 
 Variabelen kjønn beskriver fordelingen mellom menn og kvinner i datasettet.
 
-Figuren fordeling av kjønn viser at kjønnsfordelingen av 5 266 observasjonene i datasettet er nesten helt balansert. Av de 5 266 observasjonene er det 2 657 menn og 2 609 kvinner. Forskjellen mellom gruppene er dermed svært liten, noe som betyr at analysen ikke vil være skjev med hensyn til kjønn.
+Figuren fordeling av kjonn viser at kjønnsfordelingen av 5 266 observasjonene i datasettet er nesten helt balansert. Av de 5 266 observasjonene er det 2 657 menn og 2 609 kvinner. Forskjellen mellom gruppene er dermed svært liten, noe som betyr at analysen ikke vil være skjev med hensyn til kjønn.
 
 ```{r}
 # Tabell: Beskrivende statistikk for inntekt og alder etter sivilstatus (Gift vs. Ikke gift)
@@ -299,7 +299,7 @@ fordeling_sivilstatus <- heights %>%
   ) +
   theme_minimal(base_size = 14) +
   theme(
-    panel.grid.major = element_line(color = "grey80", linewidth = 0.6),
+    panel.grid.major = element_line(color = "grey80", size = 0.6),
     panel.grid.minor = element_blank(),
     axis.text.x = element_text(angle = 30, hjust = 1)
   )
@@ -315,14 +315,134 @@ Fordelingen av sivilstatus viser dermed et mønster som er vanlig i voksenbefolk
 
 ## Analysis
 
+### Sammenhengen mellom inntekt og alder
+
 ```{r}
+# figuren for sammenhengen mellom inntekt og alder
+
+sammenhengen_inntekt_alder <- heights %>%
+  ggplot(aes(x = alder, y = inntekt)) +
+  geom_point(alpha = 0.4, color = "lightblue") +     # Hver prikk representerer én person
+  geom_smooth(method = "lm", se = TRUE, color = "red", formula = y ~ x) +
+  # Legger til regresjonslinje
+  scale_x_continuous(breaks = seq(47, 56, 1)) +      # Viser alle aldersintervaller på x-aksen
+  scale_y_continuous(
+    limits = c(0, 350000),
+    breaks = seq(0, 350000, 50000),
+    labels = scales::label_number(big.mark = " ")
+  ) +
+  labs(
+    title = "Sammenhengen mellom alder og inntekt",
+    x = "Alder (år)",
+    y = "Inntekt (USD)"
+  ) +
+  theme_minimal(base_size = 14)
+sammenhengen_inntekt_alder
 
 
+# figuren for gjennomsnittlig inntekt etter alder
+gjennomsnittlig_inntekt_alder <- heights %>%
+  group_by(alder) %>%
+  summarise(gjennomsnitt_inntekt = mean(inntekt), antall_personer = n()) %>%
+  ggplot(aes(x = alder, y = gjennomsnitt_inntekt)) +
+  geom_line(color = "steelblue", linewidth = 1) +
+  geom_point(color = "red", size = 2) +
+  geom_text(aes(label = antall_personer), vjust = -1, size = 3.5, color = "black") +
+  labs(
+    title = "Gjennomsnittlig inntekt etter alder",
+    x = "Alder (år)",
+    y = "Gjennomsnittlig inntekt (USD)"
+  ) +
+  scale_y_continuous(limits = c(35000, 65000)) +
+  theme_minimal(base_size = 14)
+gjennomsnittlig_inntekt_alder
+
+
+# korrelasjonen mellom inntekt og alder
+cor(heights$alder, heights$inntekt, use = "complete.obs")
+
+# den enkle lineære regresjonen
+regresjon_alder <- lm(inntekt ~ alder, data = heights)
+summary(regresjon_alder)
  
 ```
 
+
+### Sammenhengen mellom inntekt og kjønn
+```{r}
+# figuren for sammenhengen mellom inntekt og kjønn
+sammenhengen_inntekt_kjonn <- heights %>%
+  ggplot(aes(x = kjonn, y = inntekt, fill = kjonn)) +
+  geom_boxplot(alpha = 0.7, color = "gray40") +
+  scale_y_continuous(labels = scales::label_number(big.mark = " ")) +
+  labs(
+    title = "Sammenligning av inntektsfordeling etter kjønn",
+    x = "Kjønn",
+    y = "Inntekt (USD)"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(legend.position = "none")
+sammenhengen_inntekt_kjonn
+
+# Gruppegjennomsnitt, median og standardavvik
+heights %>%
+  group_by(kjonn) %>%
+  summarise(
+    gjennomsnitt_inntekt = mean(inntekt),
+    median_inntekt = median(inntekt),
+    sd_inntekt = sd(inntekt),
+    antall_personer = n() )
+
+#den enkle lineære regresjonen
+regresjon_kjonn <- lm(inntekt ~ kjonn, data = heights)
+summary(regresjon_kjonn)
+
+```
+
+
+
+### Sammenhengen mellom inntekt og sivilstatus
+```{r}
+# figuren for sammenhengen mellom inntekt og sivilstatus
+
+sammenhengen_inntekt_sivilstatus <- heights %>%
+  ggplot(aes(x = sivilstatus, y = inntekt, fill = sivilstatus)) +
+  geom_boxplot(alpha = 0.7, color = "gray40") +
+  scale_y_continuous(
+    breaks = seq(0, 350000, 50000),
+    labels = scales::label_number(big.mark = " ")
+  ) +
+  labs(
+    title = "Sammenligning av inntektsfordeling etter sivilstatus",
+    x = "Sivilstatus",
+    y = "Inntekt (USD)"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    legend.position = "none",
+    axis.text.x = element_text(angle = 30, hjust = 1)
+  )
+sammenhengen_inntekt_sivilstatus
+
+## Gruppegjennomsnitt, median og standardavvik
+heights %>%
+  group_by(sivilstatus) %>%
+  summarise(
+    gjennomsnitt_inntekt = mean(inntekt),
+    median_inntekt = median(inntekt),
+    sd_inntekt = sd(inntekt),
+    antall_personer = n() )
+
+#den enkle lineære regresjonen
+regresjon_sivilstatus <- lm(inntekt ~ sivilstatus, data = heights)
+summary(regresjon_sivilstatus)
+
+```
+
+
+
 ## Results
 
-## Conclusion
+## Konklusjon
 
 ## References
