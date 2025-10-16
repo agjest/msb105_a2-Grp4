@@ -25,6 +25,12 @@ Ifølge @judge2004 viser høyde, som ofte er korrelert med maskuline trekk og so
 **Sivilstatus og økonomisk velstand:**
 @seeborg2004 undersøkte effekten av endringer i sivilstatus på levestandard ved å analysere data som fulgte de samme personene over flere år gjennom *National Longitudinal Survey of Youth (NLSY)*. Studien viser at ekteskap har en positiv effekt på kvinners økonomiske situasjon, mens menn i mindre grad påvirkes. Ved skilsmisse opplever kvinner derimot en betydelig nedgang i sin økonomiske levestandard, mens menn i mange tilfeller opplever en svak økning. Dette forklares gjennom ulik arbeidsdeltakelse, foreldreansvar og kjønnsroller som vedvarer i arbeidsmarkedet. Dermed kan sivilstatus betraktes som en sentral sosial indikator på økonomisk stabilitet, spesielt for kvinner.
 
+**Utdanning, kjønn og inntektsforskjeller:**
+@influence2020 viser at utdanningsnivå har en avgjørende betydning for inntektsnivå, men at kjønnsforskjeller vedvarer selv etter kontroll for utdanning. Menn tjener gjennomgående mer enn kvinner på alle utdanningsnivåer, og dette gapet øker i høyere stillinger. Studien påpeker også at rase og ekteskap påvirker inntekt gjennom sammensatte sosiale mekanismer, der menn oftere drar nytte av tradisjonelle familiemønstre, mens kvinner i større grad bærer økonomiske konsekvenser ved skilsmisse eller delt omsorgsansvar.
+
+**Alder og livsløp:**
+Flere økonomiske teorier viser at inntekt typisk følger et livsløp der den øker med alder og erfaring frem til et viss punkt før den flater ut. @seeborg2004 kontrollerte for alder i sine regresjonsmodeller og fant en tydelig positiv sammenheng mellom utdanning, alder og inntekt. Dette støtter teorien om at erfaring og utdanning bygges opp over tid og bidrar til høyere økonomisk utbytte.
+
 
 
 
