@@ -17,6 +17,10 @@ I analysen kombinerer vi beskrivende statistikk og grafer for å identifisere m�
 
 ## Review of literature
 
+Flere studier har tidligere undersøkt hvordan demografiske faktorer som kjønn, sivilstatus og alder påvirker individers inntektsnivå. Et gjennomgående funn i forskningen er at både biologiske og sosiale forskjeller skaper systematiske mønstre i økonomisk utbytte. 
+
+
+
 ## Description of data
 
 ```{r}
@@ -31,7 +35,12 @@ library(vtable)
 library(flextable)
 
 # laster inn pakken modelr og datasett heights
-install.packages("modelr")
+options(repos = c(CRAN = "https://cloud.r-project.org"))
+pkgs <- c("modelr","dplyr","ggplot2","scales","vtable","flextable")
+to_install <- setdiff(pkgs, rownames(installed.packages()))
+if (length(to_install)) install.packages(to_install)
+lapply(pkgs, library, character.only = TRUE)
+
 library(modelr)
 heights <- modelr::heights
 heights
@@ -152,7 +161,7 @@ fordeling_alder <- heights %>%
   )
 fordeling_alder
 
->>>>>>> Introduksjon
+# >>>>>>> Introduksjon
 ```
 
 Variabelen alder viser deltakernes alder målt i hele år.
