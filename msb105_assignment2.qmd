@@ -19,7 +19,8 @@ I analysen kombinerer vi beskrivende statistikk og grafer for å identifisere m�
 
 Flere studier har tidligere undersøkt hvordan demografiske faktorer som kjønn, sivilstatus og alder påvirker individers inntektsnivå. Et gjennomgående funn i forskningen er at både biologiske og sosiale forskjeller skaper systematiske mønstre i økonomisk utbytte. 
 
-
+**Kjønn og inntekt:**
+Ifølge @judge2004 viser høyde, som ofte er korrelert med maskuline trekk og sosial status, en positiv sammenheng med karrieresuksess og inntekt. Studien fant at høyere personer i snitt tjener mer, også etter kontroll for kjønn, alder og vekt. Sammenhengen mellom høyde og inntekt forklares blant annet gjennom sosiale mekanismer der høyere personer tilskrives større autoritet og selvtillit, noe som igjen påvirker både jobbpresentasjon og lederfremgang. Selv om effekten var sterkere blant menn enn kvinner, var forskjellen ikke statistisk signifikant, noe som antyder at sosiale oppfatninger om status knyttet til fysiske kjennetegn påvirker begge kjønn. 
 
 ## Description of data
 
