@@ -52,7 +52,7 @@ Når vi kombinerer funnene fra @judge2004, @seeborg2004, @xie2022 og @mohanneill
 
 ## Description of data
 ::: incremental
--   Første punkt, laster inn og rydder datassettet 'heights'
+-   Første punkt
     
 ### Laster inn og rydder datassettet 'heights' 
 ```{r}
@@ -111,7 +111,7 @@ Resultatene fra summary viser følgende: Inntekt varierer fra 45 til 343 830 USD
 
 Etter rensingen består datasettet dermed av et balansert og ryddig utvalg som danner grunnlaget for videre beskrivelse og analyse av sammenhengen mellom inntekt, alder, kjønn og sivilstatus.
 
--   Andre punkt, beskrivelse av data
+-   Andre punkt
     
 ### beskriver variabler inntekt og alder
 ```{r}
@@ -190,7 +190,7 @@ Variabelen alder viser deltakernes alder målt i hele år.
 
 Figuren fordeling av alder viser at aldersfordelingen mellom 47 til 56 år, er jevn og konsentrert innenfor et smalt intervall. De fleste observasjonene ligger mellom 48 og 55 år.Det er få personer som er 47 eller 56 år. Aldersspennet er lite, noe som betyr at de fleste personene i datasettet er omtrent like gamle. 
 
--   Tredje punkt, beskriver variabler sivilstatus og kjønn
+-   Tredje punkt
 
 ### beskriver variabler sivilstatus og kjønn
 ```{r}
@@ -288,7 +288,7 @@ fordeling_sivilstatus <- heights %>%
   geom_bar(fill = "tomato", color = "white") +
     geom_text(
     stat = "count",
-    aes(label = ..count..),
+    aes(label = after_stat(count)),
     vjust = -0.3,           # Tekst som vises over kolonnen
     size = 2,               # Skriftstørrelse
     color = "black"         # Skriftfarge
@@ -317,8 +317,11 @@ Fordelingen av sivilstatus viser dermed et mønster som er vanlig i voksenbefolk
 
 ## Analysis
 
+I denne delen undersøkes sammenhengen mellom inntekt, alder, kjønn og sivilstatus ved hjelp av beskrivende statistikk og lineær regresjon. Målet er å identifisere hvilke faktorer som har størst
+betydning for inntektsforskjeller, og om sosiale kjennetegn som kjønn og sivilstatus spiller en større rolle enn individuelle faktorer som alder. 
+
 ::: incremental
--   Første punkt, Sammenhengen mellom inntekt og alder
+-   Første punkt
     
 ### Sammenhengen mellom inntekt og alder
 ```{r}
@@ -370,8 +373,12 @@ regresjon_alder <- lm(inntekt ~ alder, data = heights)
 summary(regresjon_alder)
  
 ```
+Korrelasjonskoeffisienten mellom alder og inntekt er r = −0.0102, noe som viser at det nesten ikke finnes noen lineær sammenheng mellom de to variablene. 
+Regresjonsmodellen gir koeffisienten β = −267, med p = 0.458 og R² = 0.0001, noe som betyr at modellen ikke finner noen statistisk signifikant lineær effekt av alder på inntekt. 
+Dette innebærer ikke at alder og inntekt er helt uavhengige, men at den lineære sammenhengen er svært svak. Det kan fortsatt eksistere en ikke-lineær relasjon som ikke fanges opp i denne enkle modellen. 
+Basert på resultatene kan vi derfor konkludere med at alder ser ut til å ha svært liten lineær innvirkning på inntekt i dette utvalget.
 
--   Andre punkt, Sammenhengen mellom inntekt og kjønn
+-   Andre punkt
 
 ### Sammenhengen mellom inntekt og kjønn
 ```{r}
@@ -403,9 +410,12 @@ regresjon_kjonn <- lm(inntekt ~ kjonn, data = heights)
 summary(regresjon_kjonn)
 
 ```
+I regresjonsmodellen der inntekt forklares av kjønn, er koeffisienten for kjonnfemale = −27 642, med p < 2e−16, noe som viser at forskjellen mellom menn og kvinner er statistisk svært signifikant.
+Modellens R²-verdi er 0.056, som betyr at kjønn alene forklarer omtrent 5,6 % av variasjonen i inntekt. Dette viser at det finnes en tydelig kjønnsforskjell i inntekt – kvinner tjener i gjennomsnitt
+mindre enn menn – men at kjønn bare forklarer en begrenset del av inntektsforskjellene. Resten av variasjonen skyldes trolig andre faktorer som utdanning, yrke, arbeidserfaring og arbeidstid.
+Resultatet er likevel i tråd med tidligere studier (Judge & Cable, 2004; Xie, 2022), som viser et vedvarende lønnsgap mellom menn og kvinner.
 
-
--   Tredje punkt, Sammenhengen mellom inntekt og sivilstatus
+-   Tredje punkt
     
 ### Sammenhengen mellom inntekt og sivilstatus
 ```{r}
@@ -444,13 +454,18 @@ regresjon_sivilstatus <- lm(inntekt ~ sivilstatus, data = heights)
 summary(regresjon_sivilstatus)
 
 ```
-
-
+I modellen som undersøker sivilstatus finner vi at F-verdi = 40.46, p < 2.2e−16, noe som viser at sivilstatus samlet har en statistisk signifikant effekt på inntekt. De signifikante forskjellene er mellom gifte og separerte personer: - Gifte personer tjener i gjennomsnitt omtrent 20 600 USD mer enn single.
+Separerte personer tjener omtrent 8 900 USD mindre enn single. Forskjellene for skilte og enker/enkemenn er ikke statistisk signifikante. Modellens R²-verdi er 0.03, som betyr at sivilstatus forklarer rundt 3 % av variasjonen i inntekt. Dette indikerer at selv om enkelte forskjeller er statistisk signifikante, er den samlede effekten relativt svak. Resultatet støtter likevel tidligere forskning (@seeborg2004; @mohanneill2014) som viser at ekteskap kan være forbundet med økonomiske fordeler, mens samlivsbrudd ofte reduserer inntekt – særlig for kvinner.
 
 :::
 
 ## Results
 
+Sammenfattende viser resultatene at: - Alder har en svært svak lineær sammenheng med inntekt (r = −0.0102). Kjønn har en statistisk signifikant sammenheng med inntekt (p < 2e−16), men forklarer kun 5,6 % av variasjonen. Sivilstatus har også en statistisk signifikant effekt (p < 2.2e−16), men forklarer bare 3 % av variasjonen. Dette betyr at selv om kjønn og sivilstatus har signifikante effekter, er den totale forklaringseffekten på inntektsnivået begrenset. Andre faktorer som utdanning, yrke, arbeidserfaring og arbeidstid spiller trolig en langt større rolle.
+
 ## Konklusjon
+
+Analysen viser at alder, kjønn og sivilstatus alle har målbare, men svært varierende sammenhenger med inntekt. Alder har svært liten lineær effekt, mens kjønn og sivilstatus har statistisk signifikante,men begrensede effekter. Kjønn viser seg å være den sterkeste enkeltvariabelen i modellen, men den forklarer kun en liten del av variasjonen i inntekt. Dette innebærer at selv om lønnsforskjellen mellom menn og kvinner er reell, må årsakene søkes i et bredere sett av strukturelle faktorer, som utdanningsvalg, arbeidsmarkedstilknytning og kjønnsdelte yrker (@judge2004; @xie2022).Sivilstatus har også en signifikant, men svak effekt. Gifte personer har høyere inntekt enn single, mens separerte har lavere inntekt. Dette kan gjenspeile både økonomisk stabilitet og ulikt ansvar for husholdning og forsørgelse, i tråd med funnene til @seeborg2004 og @mohanneill2014.
+Samlet viser resultatene at statistisk signifikante forskjeller ikke nødvendigvis betyr sterk forklaringskraft. Kjønn og sivilstatus har målbare effekter, men de forklarer bare en liten del av variasjonen i inntektsnivået. Dette tyder på at andre faktorer – som utdanning, erfaring, yrke og arbeidstid – spiller en større rolle, og at økonomisk ulikhet må forstås i et bredt, samfunnsmessig perspektiv.
 
 ## References
