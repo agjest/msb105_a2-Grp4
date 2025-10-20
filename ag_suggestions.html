@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="NO_nb"><head>
+<script src="ag_suggestions_files/libs/clipboard/clipboard.min.js"></script>
+<script src="ag_suggestions_files/libs/quarto-html/tabby.min.js"></script>
+<script src="ag_suggestions_files/libs/quarto-html/popper.min.js"></script>
+<script src="ag_suggestions_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="ag_suggestions_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="ag_suggestions_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="ag_suggestions_files/libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.25">
+
+  <meta name="author" content="Karin Liang, Katinca Valvatne &amp; Frida Alendal">
+  <title>Sammenhenger mellom inntekt, alder, kjønn og sivilstatus</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="ag_suggestions_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="ag_suggestions_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+      margin-bottom: 0em;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+  <link rel="stylesheet" href="ag_suggestions_files/libs/revealjs/dist/theme/quarto-0fde88a82f0356838740f155f1088782.css">
+  <link href="ag_suggestions_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="ag_suggestions_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="ag_suggestions_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="ag_suggestions_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <link href="ag_suggestions_files/libs/tabwid-1.1.3/tabwid.css" rel="stylesheet">
+  <script src="ag_suggestions_files/libs/tabwid-1.1.3/tabwid.js"></script>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Sammenhenger mellom inntekt, alder, kjønn og sivilstatus</h1>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Karin Liang, Katinca Valvatne &amp; Frida Alendal 
+</div>
+</div>
+</div>
+
+</section>
+<section id="introduksjon" class="slide level2">
+<h2>Introduksjon</h2>
+<ul>
+<li>Hvilke sammenhenger har vi mellom inntekt, alder, kjønn og sivilstatus?
+<ul>
+<li>Datasett: <em>modelr::heights</em>.</li>
+<li><span class="citation" data-cites="judge2004">Judge &amp; Cable (<a href="#/references" role="doc-biblioref" onclick="">2004</a>)</span> fant en positiv sammenheng mellom høyde og inntekt, kontrollert for kjønn og alder.</li>
+<li>Kan vi avdekke lignende mønstre med våre variabler?
+<ul>
+<li>Beskrivende statistikk og grafer for å identifisere mønstre mellom grupper.
+<ul>
+<li>menn og kvinner,</li>
+<li>gifte og single,</li>
+<li>Spill alder noen rolle?</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="litteraturgjennomgang" class="slide level2">
+<h2>Litteraturgjennomgang</h2>
+<ul>
+<li>Flere studier har tidligere undersøkt hvordan demografiske faktorer som kjønn, sivilstatus og alder påvirker individers inntektsnivå.</li>
+<li>Et gjennomgående funn i forskningen er at både biologiske og sosiale forskjeller skaper systematiske mønstre i økonomisk utbytte.</li>
+</ul>
+</section>
+<section id="kjønn-og-inntekt" class="slide level2">
+<h2>Kjønn og inntekt</h2>
+<ul>
+<li>Ifølge <span class="citation" data-cites="judge2004">Judge &amp; Cable (<a href="#/references" role="doc-biblioref" onclick="">2004</a>)</span> har karrieresuksess og inntekt en positiv sammenheng med høyde,
+<ul>
+<li>Høyde er ofte korrelert med maskuline trekk og sosial status,</li>
+<li>Studien fant at høyere personer i snitt tjener mer, også etter kontroll for kjønn, alder og vekt.</li>
+<li>Sammenhengen mellom høyde og inntekt forklares blant annet gjennom sosiale mekanismer der høyere personer tilskrives større autoritet og selvtillit
+<ul>
+<li>Påvirker både jobbpresentasjon og lederfremgang.</li>
+</ul></li>
+<li>Fant sterkere effekt blant menn enn kvinner
+<ul>
+<li>ikke statistisk signifikant</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="sivilstatus-og-økonomisk-velstand" class="slide level2">
+<h2>Sivilstatus og økonomisk velstand</h2>
+<ul>
+<li><span class="citation" data-cites="seeborg2004">Seeborg (<a href="#/references" role="doc-biblioref" onclick="">2004</a>)</span> undersøkte effekten av endringer i sivilstatus på levestandard ved å analysere data som fulgte de samme personene over flere år gjennom <em>National Longitudinal Survey of Youth (NLSY)</em>.</li>
+<li>Studien viser at ekteskap har en positiv effekt på kvinners økonomiske situasjon
+<ul>
+<li>menn påvirkes i mindre grad</li>
+</ul></li>
+<li>Ved skilsmisse opplever kvinner derimot en betydelig nedgang i sin økonomiske levestandard
+<ul>
+<li>menn derimot en svak økning.</li>
+</ul></li>
+<li>Forklaringer:
+<ul>
+<li>ulik arbeidsdeltakelse,</li>
+<li>foreldreansvar og</li>
+<li>kjønnsroller</li>
+</ul></li>
+</ul>
+</section>
+<section id="utdanning-kjønn-og-inntektsforskjeller" class="slide level2">
+<h2>Utdanning, kjønn og inntektsforskjeller</h2>
+<ul>
+<li><span class="citation" data-cites="xie2022">Xie (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span> viser at utdanningsnivå har en avgjørende betydning for inntektsnivå
+<ul>
+<li>kjønnsforskjeller vedvarer selv etter kontroll for utdanning.</li>
+</ul></li>
+<li>Menn tjener gjennomgående mer enn kvinner på alle utdanningsnivåer
+<ul>
+<li>gapet øker i høyere stillinger.</li>
+</ul></li>
+<li>Rase og ekteskap påvirker inntekt gjennom sammensatte sosiale mekanismer
+<ul>
+<li>menn drar nytte av tradisjonelle familiemønstre,</li>
+<li>mens kvinner bærer økonomiske konsekvenser ved skilsmisse eller delt omsorgsansvar.</li>
+</ul></li>
+</ul>
+</section>
+<section id="husholdningsstruktur-og-sosioøkonomiske-profiler" class="slide level2">
+<h2>Husholdningsstruktur og sosioøkonomiske profiler</h2>
+<ul>
+<li><span class="citation" data-cites="mohanneill2014">Mohan-Neill &amp; colleagues (<a href="#/references" role="doc-biblioref" onclick="">2014</a>)</span> undersøker hvordan kombinasjonen av kjønn og sivilstatus påvirker husholdningers økonomiske situasjon i USA.</li>
+<li>Gifte menn har den høyeste samlede inntekten i familien</li>
+<li>Enslige kvinner, særlig de med barn, befinner seg i den mest økonomisk utsatte gruppen.</li>
+<li>Kjønn og sivilstatus virker sammen
+<ul>
+<li>Skaper tydelig mønstre i sosioøkonomisk ulikhet mellom husholdninger.</li>
+</ul></li>
+</ul>
+</section>
+<section id="alder-og-livsløp" class="slide level2">
+<h2>Alder og livsløp</h2>
+<ul>
+<li>Inntekt livsløp fra økonomisk teori:
+<ul>
+<li>Øker med alder og erfaring frem til et viss punkt før den flater ut.</li>
+<li><span class="citation" data-cites="seeborg2004">Seeborg (<a href="#/references" role="doc-biblioref" onclick="">2004</a>)</span> kontrollerte for alder
+<ul>
+<li>Fant en tydelig positiv sammenheng mellom utdanning, alder og inntekt.</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="samlet-perspektiv" class="slide level2">
+<h2>Samlet perspektiv</h2>
+<ul>
+<li>Funnene fra <span class="citation" data-cites="judge2004">Judge &amp; Cable (<a href="#/references" role="doc-biblioref" onclick="">2004</a>)</span>, <span class="citation" data-cites="seeborg2004">Seeborg (<a href="#/references" role="doc-biblioref" onclick="">2004</a>)</span>, <span class="citation" data-cites="xie2022">Xie (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span> og <span class="citation" data-cites="mohanneill2014">Mohan-Neill &amp; colleagues (<a href="#/references" role="doc-biblioref" onclick="">2014</a>)</span>, indikerer at inntektforskjeller pårvirkes av:
+<ul>
+<li>Individuelle faktorer
+<ul>
+<li>alder og utdanning</li>
+</ul></li>
+<li>Sosiale faktorer
+<ul>
+<li>kjønn og sivilsatus</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="laster-inn-datasettet-heights" class="slide level2">
+<h2>Laster inn datasettet ‘heights’</h2>
+<ul>
+<li>Datasettet ‘heights’ som benyttes i denne oppgaven er hentet fra pakken ‘modelr’.
+<ul>
+<li>7006 observasjoner</li>
+<li>8 variabler: inntekt, høyde, vekt, alder, sivilstatus, kjønn, utdanningsnivå og AFQT-skår.</li>
+</ul></li>
+</ul>
+<div class="cell">
+<div id="tbl-head" class="cell quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-tbl">
+<div aria-describedby="tbl-head-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div class="tabwid"><style>.cl-5314d36c{}.cl-53082770{font-family:'Helvetica';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-53082784{font-family:'Helvetica';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(153, 153, 153, 1.00);background-color:transparent;}.cl-5312b6f4{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-5312b6fe{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-5312c626{width:0.837in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5312c630{width:0.829in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5312c631{width:0.752in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5312c632{width:0.803in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5312c63a{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5312c63b{width:0.948in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5312c63c{width:0.837in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5312c63d{width:0.829in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5312c644{width:0.752in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5312c645{width:0.803in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5312c646{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5312c647{width:0.948in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5312c64e{width:0.837in;background-color:rgba(255, 255, 0, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5312c64f{width:0.829in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5312c650{width:0.752in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5312c658{width:0.752in;background-color:rgba(255, 255, 0, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5312c659{width:0.803in;background-color:rgba(255, 255, 0, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5312c65a{width:0.75in;background-color:rgba(255, 255, 0, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5312c65b{width:0.948in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5312c662{width:0.837in;background-color:rgba(255, 255, 0, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5312c663{width:0.829in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5312c664{width:0.752in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5312c665{width:0.752in;background-color:rgba(255, 255, 0, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5312c66c{width:0.803in;background-color:rgba(255, 255, 0, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5312c66d{width:0.75in;background-color:rgba(255, 255, 0, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5312c66e{width:0.948in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5312c676{width:0.837in;background-color:rgba(255, 255, 0, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5312c677{width:0.829in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5312c678{width:0.752in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5312c679{width:0.752in;background-color:rgba(255, 255, 0, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5312c680{width:0.803in;background-color:rgba(255, 255, 0, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5312c681{width:0.75in;background-color:rgba(255, 255, 0, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5312c68a{width:0.948in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5312c68b{width:0.837in;background-color:rgba(255, 255, 0, 1.00);vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5312c68c{width:0.829in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5312c68d{width:0.752in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5312c694{width:0.752in;background-color:rgba(255, 255, 0, 1.00);vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5312c695{width:0.803in;background-color:rgba(255, 255, 0, 1.00);vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5312c696{width:0.75in;background-color:rgba(255, 255, 0, 1.00);vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5312c69e{width:0.948in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5312c69f{width:0.837in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5312c6a0{width:0.829in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5312c6a8{width:0.752in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5312c6a9{width:0.803in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5312c6aa{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5312c6b2{width:0.948in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-5314d36c"><thead><tr style="overflow-wrap:break-word;"><th class="cl-5312c626"><p class="cl-5312b6f4"><span class="cl-53082770">income</span></p></th><th class="cl-5312c630"><p class="cl-5312b6f4"><span class="cl-53082770">height</span></p></th><th class="cl-5312c631"><p class="cl-5312b6f4"><span class="cl-53082770">weight</span></p></th><th class="cl-5312c631"><p class="cl-5312b6f4"><span class="cl-53082770">age</span></p></th><th class="cl-5312c632"><p class="cl-5312b6fe"><span class="cl-53082770">marital</span></p></th><th class="cl-5312c63a"><p class="cl-5312b6fe"><span class="cl-53082770">sex</span></p></th><th class="cl-5312c63b"><p class="cl-5312b6f4"><span class="cl-53082770">education</span></p></th><th class="cl-5312c630"><p class="cl-5312b6f4"><span class="cl-53082770">afqt</span></p></th></tr><tr style="overflow-wrap:break-word;"><th class="cl-5312c63c"><p class="cl-5312b6f4"><span class="cl-53082784">integer</span></p></th><th class="cl-5312c63d"><p class="cl-5312b6f4"><span class="cl-53082784">numeric</span></p></th><th class="cl-5312c644"><p class="cl-5312b6f4"><span class="cl-53082784">integer</span></p></th><th class="cl-5312c644"><p class="cl-5312b6f4"><span class="cl-53082784">integer</span></p></th><th class="cl-5312c645"><p class="cl-5312b6fe"><span class="cl-53082784">factor</span></p></th><th class="cl-5312c646"><p class="cl-5312b6fe"><span class="cl-53082784">factor</span></p></th><th class="cl-5312c647"><p class="cl-5312b6f4"><span class="cl-53082784">integer</span></p></th><th class="cl-5312c63d"><p class="cl-5312b6f4"><span class="cl-53082784">numeric</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-5312c64e"><p class="cl-5312b6f4"><span class="cl-53082770">19,000</span></p></td><td class="cl-5312c64f"><p class="cl-5312b6f4"><span class="cl-53082770">60</span></p></td><td class="cl-5312c650"><p class="cl-5312b6f4"><span class="cl-53082770">155</span></p></td><td class="cl-5312c658"><p class="cl-5312b6f4"><span class="cl-53082770">53</span></p></td><td class="cl-5312c659"><p class="cl-5312b6fe"><span class="cl-53082770">married</span></p></td><td class="cl-5312c65a"><p class="cl-5312b6fe"><span class="cl-53082770">female</span></p></td><td class="cl-5312c65b"><p class="cl-5312b6f4"><span class="cl-53082770">13</span></p></td><td class="cl-5312c64f"><p class="cl-5312b6f4"><span class="cl-53082770">6.8</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-5312c64e"><p class="cl-5312b6f4"><span class="cl-53082770">35,000</span></p></td><td class="cl-5312c64f"><p class="cl-5312b6f4"><span class="cl-53082770">70</span></p></td><td class="cl-5312c650"><p class="cl-5312b6f4"><span class="cl-53082770">156</span></p></td><td class="cl-5312c658"><p class="cl-5312b6f4"><span class="cl-53082770">51</span></p></td><td class="cl-5312c659"><p class="cl-5312b6fe"><span class="cl-53082770">married</span></p></td><td class="cl-5312c65a"><p class="cl-5312b6fe"><span class="cl-53082770">female</span></p></td><td class="cl-5312c65b"><p class="cl-5312b6f4"><span class="cl-53082770">10</span></p></td><td class="cl-5312c64f"><p class="cl-5312b6f4"><span class="cl-53082770">49.4</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-5312c662"><p class="cl-5312b6f4"><span class="cl-53082770">105,000</span></p></td><td class="cl-5312c663"><p class="cl-5312b6f4"><span class="cl-53082770">65</span></p></td><td class="cl-5312c664"><p class="cl-5312b6f4"><span class="cl-53082770">195</span></p></td><td class="cl-5312c665"><p class="cl-5312b6f4"><span class="cl-53082770">52</span></p></td><td class="cl-5312c66c"><p class="cl-5312b6fe"><span class="cl-53082770">married</span></p></td><td class="cl-5312c66d"><p class="cl-5312b6fe"><span class="cl-53082770">male</span></p></td><td class="cl-5312c66e"><p class="cl-5312b6f4"><span class="cl-53082770">16</span></p></td><td class="cl-5312c663"><p class="cl-5312b6f4"><span class="cl-53082770">99.4</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-5312c676"><p class="cl-5312b6f4"><span class="cl-53082770">40,000</span></p></td><td class="cl-5312c677"><p class="cl-5312b6f4"><span class="cl-53082770">63</span></p></td><td class="cl-5312c678"><p class="cl-5312b6f4"><span class="cl-53082770">197</span></p></td><td class="cl-5312c679"><p class="cl-5312b6f4"><span class="cl-53082770">54</span></p></td><td class="cl-5312c680"><p class="cl-5312b6fe"><span class="cl-53082770">married</span></p></td><td class="cl-5312c681"><p class="cl-5312b6fe"><span class="cl-53082770">female</span></p></td><td class="cl-5312c68a"><p class="cl-5312b6f4"><span class="cl-53082770">14</span></p></td><td class="cl-5312c677"><p class="cl-5312b6f4"><span class="cl-53082770">44.0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-5312c68b"><p class="cl-5312b6f4"><span class="cl-53082770">75,000</span></p></td><td class="cl-5312c68c"><p class="cl-5312b6f4"><span class="cl-53082770">66</span></p></td><td class="cl-5312c68d"><p class="cl-5312b6f4"><span class="cl-53082770">190</span></p></td><td class="cl-5312c694"><p class="cl-5312b6f4"><span class="cl-53082770">49</span></p></td><td class="cl-5312c695"><p class="cl-5312b6fe"><span class="cl-53082770">married</span></p></td><td class="cl-5312c696"><p class="cl-5312b6fe"><span class="cl-53082770">male</span></p></td><td class="cl-5312c69e"><p class="cl-5312b6f4"><span class="cl-53082770">14</span></p></td><td class="cl-5312c68c"><p class="cl-5312b6f4"><span class="cl-53082770">59.7</span></p></td></tr></tbody><tfoot><tr style="overflow-wrap:break-word;"><td colspan="8" class="cl-5312c69f"><p class="cl-5312b6fe"><span class="cl-53082770">n: 5</span></p></td></tr></tfoot></table></div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-tbl" id="tbl-head-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Fire variabler, inntekt, alder, kjønn og sivilstatus, er relevante for denne oppgaven.
+</figcaption>
+</figure>
+</div>
+</div>
+</section>
+<section id="rydder-datasettet-heights" class="slide level2">
+<h2>Rydder datasettet ‘heights’</h2>
+<ul>
+<li>Fjernet observasjoner med manglende verdier (NA) og nullverdier.</li>
+</ul>
+<div class="cell">
+<div id="tbl-dataset-st" class="cell quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-tbl">
+<div aria-describedby="tbl-dataset-st-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div class="tabwid"><style>.cl-53348fe0{}.cl-5331415a{font-family:'Helvetica';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-53314164{font-family:'Helvetica';font-size:16pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-53327f70{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-53327f7a{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 0.5;background-color:transparent;}.cl-53328da8{width:1.521in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328dc6{width:0.78in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328dd0{width:0.903in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328dd1{width:0.914in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328dda{width:0.532in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328ddb{width:1.027in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328ddc{width:1.521in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328ddd{width:0.78in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328dde{width:0.903in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328de4{width:0.914in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328dee{width:0.532in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328def{width:1.027in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328df8{width:1.521in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328df9{width:0.78in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328dfa{width:0.903in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328dfb{width:0.914in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328e02{width:0.532in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328e03{width:1.027in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328e04{width:1.521in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328e0c{width:0.78in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328e0d{width:0.903in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328e0e{width:0.914in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328e16{width:0.532in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328e17{width:1.027in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328e18{width:1.521in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328e19{width:0.78in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328e1a{width:0.903in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328e20{width:0.914in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328e21{width:0.532in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328e22{width:1.027in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328e23{width:1.521in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328e2a{width:0.78in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328e2b{width:0.903in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328e2c{width:0.914in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328e2d{width:0.532in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328e34{width:1.027in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328e35{width:1.521in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328e36{width:0.78in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328e3e{width:0.903in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328e3f{width:0.914in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328e40{width:0.532in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328e41{width:1.027in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328e48{width:1.521in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328e49{width:0.78in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328e4a{width:0.903in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328e52{width:0.914in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328e53{width:0.532in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328e54{width:1.027in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328e55{width:1.521in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328e5c{width:0.78in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328e5d{width:0.903in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328e5e{width:0.914in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328e5f{width:0.532in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53328e66{width:1.027in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-53348fe0"><thead><tr style="overflow-wrap:break-word;"><th class="cl-53328da8"><p class="cl-53327f70"><span class="cl-5331415a">Variable</span></p></th><th class="cl-53328dc6"><p class="cl-53327f70"><span class="cl-5331415a">N</span></p></th><th class="cl-53328dd0"><p class="cl-53327f70"><span class="cl-5331415a">Mean</span></p></th><th class="cl-53328dd1"><p class="cl-53327f70"><span class="cl-5331415a">Std. Dev.</span></p></th><th class="cl-53328dda"><p class="cl-53327f70"><span class="cl-5331415a">Min</span></p></th><th class="cl-53328dd0"><p class="cl-53327f70"><span class="cl-5331415a">Pctl. 25</span></p></th><th class="cl-53328dd0"><p class="cl-53327f70"><span class="cl-5331415a">Pctl. 75</span></p></th><th class="cl-53328ddb"><p class="cl-53327f70"><span class="cl-5331415a">Max</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-53328ddc"><p class="cl-53327f7a"><span class="cl-53314164">inntekt</span></p></td><td class="cl-53328ddd"><p class="cl-53327f7a"><span class="cl-53314164">5266</span></p></td><td class="cl-53328dde"><p class="cl-53327f7a"><span class="cl-53314164">54819</span></p></td><td class="cl-53328de4"><p class="cl-53327f7a"><span class="cl-53314164">58394</span></p></td><td class="cl-53328dee"><p class="cl-53327f7a"><span class="cl-53314164">45</span></p></td><td class="cl-53328dde"><p class="cl-53327f7a"><span class="cl-53314164">23425</span></p></td><td class="cl-53328dde"><p class="cl-53327f7a"><span class="cl-53314164">65000</span></p></td><td class="cl-53328def"><p class="cl-53327f7a"><span class="cl-53314164">343830</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-53328df8"><p class="cl-53327f7a"><span class="cl-53314164">alder</span></p></td><td class="cl-53328df9"><p class="cl-53327f7a"><span class="cl-53314164">5266</span></p></td><td class="cl-53328dfa"><p class="cl-53327f7a"><span class="cl-53314164">51</span></p></td><td class="cl-53328dfb"><p class="cl-53327f7a"><span class="cl-53314164">2.2</span></p></td><td class="cl-53328e02"><p class="cl-53327f7a"><span class="cl-53314164">47</span></p></td><td class="cl-53328dfa"><p class="cl-53327f7a"><span class="cl-53314164">49</span></p></td><td class="cl-53328dfa"><p class="cl-53327f7a"><span class="cl-53314164">53</span></p></td><td class="cl-53328e03"><p class="cl-53327f7a"><span class="cl-53314164">56</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-53328e04"><p class="cl-53327f7a"><span class="cl-53314164">kjonn</span></p></td><td class="cl-53328e0c"><p class="cl-53327f7a"><span class="cl-53314164">5266</span></p></td><td class="cl-53328e0d"><p class="cl-53327f7a"><span class="cl-53314164"></span></p></td><td class="cl-53328e0e"><p class="cl-53327f7a"><span class="cl-53314164"></span></p></td><td class="cl-53328e16"><p class="cl-53327f7a"><span class="cl-53314164"></span></p></td><td class="cl-53328e0d"><p class="cl-53327f7a"><span class="cl-53314164"></span></p></td><td class="cl-53328e0d"><p class="cl-53327f7a"><span class="cl-53314164"></span></p></td><td class="cl-53328e17"><p class="cl-53327f7a"><span class="cl-53314164"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-53328ddc"><p class="cl-53327f7a"><span class="cl-53314164">... male</span></p></td><td class="cl-53328ddd"><p class="cl-53327f7a"><span class="cl-53314164">2657</span></p></td><td class="cl-53328dde"><p class="cl-53327f7a"><span class="cl-53314164">50%</span></p></td><td class="cl-53328de4"><p class="cl-53327f7a"><span class="cl-53314164"></span></p></td><td class="cl-53328dee"><p class="cl-53327f7a"><span class="cl-53314164"></span></p></td><td class="cl-53328dde"><p class="cl-53327f7a"><span class="cl-53314164"></span></p></td><td class="cl-53328dde"><p class="cl-53327f7a"><span class="cl-53314164"></span></p></td><td class="cl-53328def"><p class="cl-53327f7a"><span class="cl-53314164"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-53328e18"><p class="cl-53327f7a"><span class="cl-53314164">... female</span></p></td><td class="cl-53328e19"><p class="cl-53327f7a"><span class="cl-53314164">2609</span></p></td><td class="cl-53328e1a"><p class="cl-53327f7a"><span class="cl-53314164">50%</span></p></td><td class="cl-53328e20"><p class="cl-53327f7a"><span class="cl-53314164"></span></p></td><td class="cl-53328e21"><p class="cl-53327f7a"><span class="cl-53314164"></span></p></td><td class="cl-53328e1a"><p class="cl-53327f7a"><span class="cl-53314164"></span></p></td><td class="cl-53328e1a"><p class="cl-53327f7a"><span class="cl-53314164"></span></p></td><td class="cl-53328e22"><p class="cl-53327f7a"><span class="cl-53314164"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-53328e23"><p class="cl-53327f7a"><span class="cl-53314164">sivilstatus</span></p></td><td class="cl-53328e2a"><p class="cl-53327f7a"><span class="cl-53314164">5266</span></p></td><td class="cl-53328e2b"><p class="cl-53327f7a"><span class="cl-53314164"></span></p></td><td class="cl-53328e2c"><p class="cl-53327f7a"><span class="cl-53314164"></span></p></td><td class="cl-53328e2d"><p class="cl-53327f7a"><span class="cl-53314164"></span></p></td><td class="cl-53328e2b"><p class="cl-53327f7a"><span class="cl-53314164"></span></p></td><td class="cl-53328e2b"><p class="cl-53327f7a"><span class="cl-53314164"></span></p></td><td class="cl-53328e34"><p class="cl-53327f7a"><span class="cl-53314164"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-53328e35"><p class="cl-53327f7a"><span class="cl-53314164">... single</span></p></td><td class="cl-53328e36"><p class="cl-53327f7a"><span class="cl-53314164">710</span></p></td><td class="cl-53328e3e"><p class="cl-53327f7a"><span class="cl-53314164">13%</span></p></td><td class="cl-53328e3f"><p class="cl-53327f7a"><span class="cl-53314164"></span></p></td><td class="cl-53328e40"><p class="cl-53327f7a"><span class="cl-53314164"></span></p></td><td class="cl-53328e3e"><p class="cl-53327f7a"><span class="cl-53314164"></span></p></td><td class="cl-53328e3e"><p class="cl-53327f7a"><span class="cl-53314164"></span></p></td><td class="cl-53328e41"><p class="cl-53327f7a"><span class="cl-53314164"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-53328df8"><p class="cl-53327f7a"><span class="cl-53314164">... married</span></p></td><td class="cl-53328df9"><p class="cl-53327f7a"><span class="cl-53314164">3101</span></p></td><td class="cl-53328dfa"><p class="cl-53327f7a"><span class="cl-53314164">59%</span></p></td><td class="cl-53328dfb"><p class="cl-53327f7a"><span class="cl-53314164"></span></p></td><td class="cl-53328e02"><p class="cl-53327f7a"><span class="cl-53314164"></span></p></td><td class="cl-53328dfa"><p class="cl-53327f7a"><span class="cl-53314164"></span></p></td><td class="cl-53328dfa"><p class="cl-53327f7a"><span class="cl-53314164"></span></p></td><td class="cl-53328e03"><p class="cl-53327f7a"><span class="cl-53314164"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-53328e04"><p class="cl-53327f7a"><span class="cl-53314164">... separated</span></p></td><td class="cl-53328e0c"><p class="cl-53327f7a"><span class="cl-53314164">233</span></p></td><td class="cl-53328e0d"><p class="cl-53327f7a"><span class="cl-53314164">4%</span></p></td><td class="cl-53328e0e"><p class="cl-53327f7a"><span class="cl-53314164"></span></p></td><td class="cl-53328e16"><p class="cl-53327f7a"><span class="cl-53314164"></span></p></td><td class="cl-53328e0d"><p class="cl-53327f7a"><span class="cl-53314164"></span></p></td><td class="cl-53328e0d"><p class="cl-53327f7a"><span class="cl-53314164"></span></p></td><td class="cl-53328e17"><p class="cl-53327f7a"><span class="cl-53314164"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-53328e48"><p class="cl-53327f7a"><span class="cl-53314164">... divorced</span></p></td><td class="cl-53328e49"><p class="cl-53327f7a"><span class="cl-53314164">1115</span></p></td><td class="cl-53328e4a"><p class="cl-53327f7a"><span class="cl-53314164">21%</span></p></td><td class="cl-53328e52"><p class="cl-53327f7a"><span class="cl-53314164"></span></p></td><td class="cl-53328e53"><p class="cl-53327f7a"><span class="cl-53314164"></span></p></td><td class="cl-53328e4a"><p class="cl-53327f7a"><span class="cl-53314164"></span></p></td><td class="cl-53328e4a"><p class="cl-53327f7a"><span class="cl-53314164"></span></p></td><td class="cl-53328e54"><p class="cl-53327f7a"><span class="cl-53314164"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-53328e55"><p class="cl-53327f7a"><span class="cl-53314164">... widowed</span></p></td><td class="cl-53328e5c"><p class="cl-53327f7a"><span class="cl-53314164">107</span></p></td><td class="cl-53328e5d"><p class="cl-53327f7a"><span class="cl-53314164">2%</span></p></td><td class="cl-53328e5e"><p class="cl-53327f7a"><span class="cl-53314164"></span></p></td><td class="cl-53328e5f"><p class="cl-53327f7a"><span class="cl-53314164"></span></p></td><td class="cl-53328e5d"><p class="cl-53327f7a"><span class="cl-53314164"></span></p></td><td class="cl-53328e5d"><p class="cl-53327f7a"><span class="cl-53314164"></span></p></td><td class="cl-53328e66"><p class="cl-53327f7a"><span class="cl-53314164"></span></p></td></tr></tbody></table></div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-tbl" id="tbl-dataset-st-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Flertallet av personene i datasettet er gift (married) — rundt 59 % av utvalget (3 101 personer). 710 personer (13 %) er single, mens 1 115 (21 %) er skilt (divorced). De resterende er separert (233 personer) og enkemann/enke (107 personer). Fordelingen mellom kjønn er nesten helt jevn, med 2 657 menn (50,5 %) og 2 609 kvinner (49,5 %).
+</figcaption>
+</figure>
+</div>
+</div>
+</section>
+<section id="histogram-inntekt" class="slide level2">
+<h2>Histogram inntekt</h2>
+
+<img data-src="ag_suggestions_files/figure-revealjs/fig-hist-inc-1.png" width="672" class="r-stretch quarto-figure-center" id="fig-hist-inc"><p class="caption">
+Figure&nbsp;1: Gjennomsnittlig inntekt i utvalget er 54 819 USD, med en median på 40 000 USD og en stor spredning (standardavvik på 58 394 USD). Noen få personer har svært høye inntekter 343 830 USD som trekker gjennomsnittet opp. Fordelingen er høyreskjev.
+</p></section>
+<section id="histogram-alder" class="slide level2">
+<h2>Histogram alder</h2>
+
+<img data-src="ag_suggestions_files/figure-revealjs/fig-age-hist-1.png" width="672" class="r-stretch quarto-figure-center" id="fig-age-hist"><p class="caption">
+Figure&nbsp;2: Variabelen alder viser deltakernes alder målt i hele år. Figuren fordeling av alder viser at aldersfordelingen mellom 47 til 56 år, er jevn og konsentrert innenfor et smalt intervall.De fleste observasjonene ligger mellom 48 og 55 år.Det er få personer som er 47 eller 56 år.
+</p></section>
+<section id="gift-versus-ikke-gift" class="slide level2">
+<h2>Gift versus ikke-gift</h2>
+<div class="absolute" style="top: 150px; ">
+<div class="cell">
+<div id="tbl-gift-ikkegift" class="cell quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-tbl">
+<div aria-describedby="tbl-gift-ikkegift-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div class="tabwid"><style>.cl-5376ff1a{}.cl-5373f7a2{font-family:'Helvetica';font-size:16pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-53752730{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-5375341e{width:2.237in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5375341f{width:0.78in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53753420{width:0.903in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53753428{width:2.237in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53753429{width:0.78in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5375342a{width:0.903in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53753432{width:2.237in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5375343c{width:0.78in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5375343d{width:0.903in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5375343e{width:2.237in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53753446{width:0.78in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53753447{width:0.903in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53753448{width:2.237in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53753450{width:0.78in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53753451{width:0.903in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5375345a{width:2.237in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5375345b{width:0.78in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53753464{width:0.903in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53753465{width:2.237in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53753466{width:0.78in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-53753467{width:0.903in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-5376ff1a"><thead><tr style="overflow-wrap:break-word;"><th class="cl-5375341e"><p class="cl-53752730"><span class="cl-5373f7a2">Variable</span></p></th><th class="cl-5375341f"><p class="cl-53752730"><span class="cl-5373f7a2">N</span></p></th><th class="cl-53753420"><p class="cl-53752730"><span class="cl-5373f7a2">Mean</span></p></th><th class="cl-53753420"><p class="cl-53752730"><span class="cl-5373f7a2">SD</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-53753428"><p class="cl-53752730"><span class="cl-5373f7a2">sivilgruppe: Gift</span></p></td><td class="cl-53753429"><p class="cl-53752730"><span class="cl-5373f7a2"></span></p></td><td class="cl-5375342a"><p class="cl-53752730"><span class="cl-5373f7a2"></span></p></td><td class="cl-5375342a"><p class="cl-53752730"><span class="cl-5373f7a2"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-53753432"><p class="cl-53752730"><span class="cl-5373f7a2">Inntekt (USD)</span></p></td><td class="cl-5375343c"><p class="cl-53752730"><span class="cl-5373f7a2">3101</span></p></td><td class="cl-5375343d"><p class="cl-53752730"><span class="cl-5373f7a2">62931</span></p></td><td class="cl-5375343d"><p class="cl-53752730"><span class="cl-5373f7a2">65476</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-5375343e"><p class="cl-53752730"><span class="cl-5373f7a2">Alder (år)</span></p></td><td class="cl-53753446"><p class="cl-53752730"><span class="cl-5373f7a2">3101</span></p></td><td class="cl-53753447"><p class="cl-53752730"><span class="cl-5373f7a2">51</span></p></td><td class="cl-53753447"><p class="cl-53752730"><span class="cl-5373f7a2">2.2</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-53753448"><p class="cl-53752730"><span class="cl-5373f7a2"></span></p></td><td class="cl-53753450"><p class="cl-53752730"><span class="cl-5373f7a2"></span></p></td><td class="cl-53753451"><p class="cl-53752730"><span class="cl-5373f7a2"></span></p></td><td class="cl-53753451"><p class="cl-53752730"><span class="cl-5373f7a2"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-5375345a"><p class="cl-53752730"><span class="cl-5373f7a2">sivilgruppe: Ikke gift</span></p></td><td class="cl-5375345b"><p class="cl-53752730"><span class="cl-5373f7a2"></span></p></td><td class="cl-53753464"><p class="cl-53752730"><span class="cl-5373f7a2"></span></p></td><td class="cl-53753464"><p class="cl-53752730"><span class="cl-5373f7a2"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-53753432"><p class="cl-53752730"><span class="cl-5373f7a2">Inntekt (USD)</span></p></td><td class="cl-5375343c"><p class="cl-53752730"><span class="cl-5373f7a2">2165</span></p></td><td class="cl-5375343d"><p class="cl-53752730"><span class="cl-5373f7a2">43199</span></p></td><td class="cl-5375343d"><p class="cl-53752730"><span class="cl-5373f7a2">43880</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-53753465"><p class="cl-53752730"><span class="cl-5373f7a2">Alder (år)</span></p></td><td class="cl-53753466"><p class="cl-53752730"><span class="cl-5373f7a2">2165</span></p></td><td class="cl-53753467"><p class="cl-53752730"><span class="cl-5373f7a2">51</span></p></td><td class="cl-53753467"><p class="cl-53752730"><span class="cl-5373f7a2">2.2</span></p></td></tr></tbody></table></div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-tbl" id="tbl-gift-ikkegift-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3: Variabelen sivilstatus viser 5266 deltakernes ekteskapsstatus og består av fem kategorier: single, married, separated, divorced og widowed.Obeservasjonene som er gift har høyere gjennomsnittsinntekt enn de som ikke er gift. Gruppen “Ikke gift” inkluderer personer som er single, skilt, separert eller enke/enkemann.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="fordeling-sivilstatus" class="slide level2">
+<h2>Fordeling sivilstatus</h2>
+
+<img data-src="ag_suggestions_files/figure-revealjs/fig-sivilstatus-1.png" width="672" class="r-stretch quarto-figure-center" id="fig-sivilstatus"><p class="caption">
+Figure&nbsp;3: Figuren fordeling av sivilstatus viser hvordan observasjonene fordeler seg mellom disse gruppene. Det fremgår tydelig at flertallet av personene er gift (married), med 3,101 observasjoner, noe som utgjør nærmere 59 prosent av utvalget. Videre er 1,115 personer skilt (divorced) og 710 single (never married), mens kategoriene separated (233) og widowed (107) utgjør en mindre andel.
+</p></section>
+<section id="analysis" class="slide level2">
+<h2>Analysis</h2>
+<ul>
+<li>Sammenhengen mellom inntekt, alder, kjønn og sivilstatus ved hjelp av beskrivende statistikk og lineær regresjon.</li>
+<li>Identifisere hvilke faktorer som har størst betydning for inntektsforskjeller</li>
+<li>Om sosiale kjennetegn som kjønn og sivilstatus spiller en større rolle enn individuelle faktorer som alder.</li>
+</ul>
+</section>
+<section id="sammenhengen-mellom-inntekt-og-alder" class="slide level2">
+<h2>Sammenhengen mellom inntekt og alder</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="ag_suggestions_files/figure-revealjs/unnamed-chunk-6-1.png" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="ag_suggestions_files/figure-revealjs/unnamed-chunk-7-1.png" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<ul>
+<li>Korrelasjonskoeffisienten mellom alder og inntekt er r = -0.0102.</li>
+<li>Finnes nesten ikke noen lineær sammenheng mellom de to variablene.</li>
+</ul>
+</section>
+<section id="sammenhengen-mellom-inntekt-og-kjønn" class="slide level2">
+<h2>Sammenhengen mellom inntekt og kjønn</h2>
+
+<img data-src="ag_suggestions_files/figure-revealjs/unnamed-chunk-10-1.png" width="672" class="r-stretch"></section>
+<section id="sammenhengen-mellom-inntekt-og-sivilstatus" class="slide level2">
+<h2>Sammenhengen mellom inntekt og sivilstatus</h2>
+
+<img data-src="ag_suggestions_files/figure-revealjs/unnamed-chunk-13-1.png" width="672" class="r-stretch"></section>
+<section id="sivilstatus" class="slide level2">
+<h2>Sivilstatus</h2>
+<div class="absolute" style="top: 150px; ">
+<div class="cell">
+<div id="tbl-mean" class="cell quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-tbl">
+<div aria-describedby="tbl-mean-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div class="tabwid"><style>.cl-54416818{}.cl-543dee2c{font-family:'Helvetica';font-size:16pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-543f1c8e{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-543f1c8f{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-543f2abc{width:1.274in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-543f2abd{width:2.262in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-543f2abe{width:1.73in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-543f2abf{width:1.236in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-543f2ac6{width:1.755in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-543f2ad0{width:1.274in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-543f2ad1{width:2.262in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-543f2ad2{width:1.73in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-543f2ada{width:1.236in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-543f2adb{width:1.755in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-543f2adc{width:1.274in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-543f2add{width:2.262in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-543f2ae4{width:1.73in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-543f2ae5{width:1.236in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-543f2ae6{width:1.755in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-543f2ae7{width:1.274in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-543f2aee{width:2.262in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-543f2aef{width:1.73in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-543f2af0{width:1.236in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-543f2af8{width:1.755in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-543f2af9{width:1.274in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-543f2afa{width:2.262in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-543f2b02{width:1.73in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-543f2b03{width:1.236in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-543f2b0c{width:1.755in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-54416818"><thead><tr style="overflow-wrap:break-word;"><th class="cl-543f2abc"><p class="cl-543f1c8e"><span class="cl-543dee2c">sivilstatus</span></p></th><th class="cl-543f2abd"><p class="cl-543f1c8f"><span class="cl-543dee2c">gjennomsnitt inntekt</span></p></th><th class="cl-543f2abe"><p class="cl-543f1c8f"><span class="cl-543dee2c">median inntekt</span></p></th><th class="cl-543f2abf"><p class="cl-543f1c8f"><span class="cl-543dee2c">sd inntekt</span></p></th><th class="cl-543f2ac6"><p class="cl-543f1c8f"><span class="cl-543dee2c">antall personer</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-543f2ad0"><p class="cl-543f1c8e"><span class="cl-543dee2c">single</span></p></td><td class="cl-543f2ad1"><p class="cl-543f1c8f"><span class="cl-543dee2c">42,299.8</span></p></td><td class="cl-543f2ad2"><p class="cl-543f1c8f"><span class="cl-543dee2c">31,000</span></p></td><td class="cl-543f2ada"><p class="cl-543f1c8f"><span class="cl-543dee2c">48,048.0</span></p></td><td class="cl-543f2adb"><p class="cl-543f1c8f"><span class="cl-543dee2c">710</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-543f2adc"><p class="cl-543f1c8e"><span class="cl-543dee2c">married</span></p></td><td class="cl-543f2add"><p class="cl-543f1c8f"><span class="cl-543dee2c">62,930.6</span></p></td><td class="cl-543f2ae4"><p class="cl-543f1c8f"><span class="cl-543dee2c">46,000</span></p></td><td class="cl-543f2ae5"><p class="cl-543f1c8f"><span class="cl-543dee2c">65,475.8</span></p></td><td class="cl-543f2ae6"><p class="cl-543f1c8f"><span class="cl-543dee2c">3,101</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-543f2ae7"><p class="cl-543f1c8e"><span class="cl-543dee2c">separated</span></p></td><td class="cl-543f2aee"><p class="cl-543f1c8f"><span class="cl-543dee2c">33,421.4</span></p></td><td class="cl-543f2aef"><p class="cl-543f1c8f"><span class="cl-543dee2c">27,000</span></p></td><td class="cl-543f2af0"><p class="cl-543f1c8f"><span class="cl-543dee2c">26,283.9</span></p></td><td class="cl-543f2af8"><p class="cl-543f1c8f"><span class="cl-543dee2c">233</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-543f2adc"><p class="cl-543f1c8e"><span class="cl-543dee2c">divorced</span></p></td><td class="cl-543f2add"><p class="cl-543f1c8f"><span class="cl-543dee2c">46,458.0</span></p></td><td class="cl-543f2ae4"><p class="cl-543f1c8f"><span class="cl-543dee2c">38,000</span></p></td><td class="cl-543f2ae5"><p class="cl-543f1c8f"><span class="cl-543dee2c">44,093.1</span></p></td><td class="cl-543f2ae6"><p class="cl-543f1c8f"><span class="cl-543dee2c">1,115</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-543f2af9"><p class="cl-543f1c8e"><span class="cl-543dee2c">widowed</span></p></td><td class="cl-543f2afa"><p class="cl-543f1c8f"><span class="cl-543dee2c">36,506.2</span></p></td><td class="cl-543f2b02"><p class="cl-543f1c8f"><span class="cl-543dee2c">26,500</span></p></td><td class="cl-543f2b03"><p class="cl-543f1c8f"><span class="cl-543dee2c">39,357.2</span></p></td><td class="cl-543f2b0c"><p class="cl-543f1c8f"><span class="cl-543dee2c">107</span></p></td></tr></tbody></table></div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-tbl" id="tbl-mean-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4: Gruppegjennomsnitt, median og standardavvik
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="inntekt-for-gifteikke-gifte-fordelt-på-kjønn" class="slide level2">
+<h2>Inntekt for gifte/ikke gifte fordelt på kjønn</h2>
+<div class="absolute" style="top: 150px; ">
+<div class="cell">
+<div class="cell-output-display">
+<div class="tabwid"><style>.cl-54549258{}.cl-5451b506{font-family:'Helvetica';font-size:16pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-5452d864{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-5452d86e{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-5452e4b2{width:0.582in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5452e4b3{width:0.952in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5452e4bc{width:2.323in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5452e4bd{width:1.792in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5452e4be{width:1.298in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5452e4c6{width:1.817in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5452e4c7{width:0.582in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5452e4c8{width:0.952in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5452e4d0{width:2.323in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5452e4d1{width:1.792in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5452e4da{width:1.298in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5452e4db{width:1.817in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5452e4e4{width:0.582in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5452e4e5{width:0.952in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5452e4e6{width:2.323in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5452e4ee{width:1.792in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5452e4ef{width:1.298in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5452e4f0{width:1.817in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-54549258"><thead><tr style="overflow-wrap:break-word;"><th class="cl-5452e4b2"><p class="cl-5452d864"><span class="cl-5451b506">gift</span></p></th><th class="cl-5452e4b3"><p class="cl-5452d86e"><span class="cl-5451b506">kjonn</span></p></th><th class="cl-5452e4bc"><p class="cl-5452d864"><span class="cl-5451b506">gjennomsnitt_inntekt</span></p></th><th class="cl-5452e4bd"><p class="cl-5452d864"><span class="cl-5451b506">median_inntekt</span></p></th><th class="cl-5452e4be"><p class="cl-5452d864"><span class="cl-5451b506">sd_inntekt</span></p></th><th class="cl-5452e4c6"><p class="cl-5452d864"><span class="cl-5451b506">antall_personer</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-5452e4c7"><p class="cl-5452d864"><span class="cl-5451b506">0</span></p></td><td class="cl-5452e4c8"><p class="cl-5452d86e"><span class="cl-5451b506">male</span></p></td><td class="cl-5452e4d0"><p class="cl-5452d864"><span class="cl-5451b506">49,370.5</span></p></td><td class="cl-5452e4d1"><p class="cl-5452d864"><span class="cl-5451b506">36,000</span></p></td><td class="cl-5452e4da"><p class="cl-5452d864"><span class="cl-5451b506">55,423.0</span></p></td><td class="cl-5452e4db"><p class="cl-5452d864"><span class="cl-5451b506">974</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-5452e4c7"><p class="cl-5452d864"><span class="cl-5451b506">0</span></p></td><td class="cl-5452e4c8"><p class="cl-5452d86e"><span class="cl-5451b506">female</span></p></td><td class="cl-5452e4d0"><p class="cl-5452d864"><span class="cl-5451b506">38,152.8</span></p></td><td class="cl-5452e4d1"><p class="cl-5452d864"><span class="cl-5451b506">32,000</span></p></td><td class="cl-5452e4da"><p class="cl-5452d864"><span class="cl-5451b506">30,546.9</span></p></td><td class="cl-5452e4db"><p class="cl-5452d864"><span class="cl-5451b506">1,191</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-5452e4c7"><p class="cl-5452d864"><span class="cl-5451b506">1</span></p></td><td class="cl-5452e4c8"><p class="cl-5452d86e"><span class="cl-5451b506">male</span></p></td><td class="cl-5452e4d0"><p class="cl-5452d864"><span class="cl-5451b506">79,592.6</span></p></td><td class="cl-5452e4d1"><p class="cl-5452d864"><span class="cl-5451b506">57,000</span></p></td><td class="cl-5452e4da"><p class="cl-5452d864"><span class="cl-5451b506">77,476.6</span></p></td><td class="cl-5452e4db"><p class="cl-5452d864"><span class="cl-5451b506">1,683</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-5452e4e4"><p class="cl-5452d864"><span class="cl-5451b506">1</span></p></td><td class="cl-5452e4e5"><p class="cl-5452d86e"><span class="cl-5451b506">female</span></p></td><td class="cl-5452e4e6"><p class="cl-5452d864"><span class="cl-5451b506">43,154.8</span></p></td><td class="cl-5452e4ee"><p class="cl-5452d864"><span class="cl-5451b506">35,000</span></p></td><td class="cl-5452e4ef"><p class="cl-5452d864"><span class="cl-5451b506">39,149.0</span></p></td><td class="cl-5452e4f0"><p class="cl-5452d864"><span class="cl-5451b506">1,418</span></p></td></tr></tbody></table></div>
+</div>
+</div>
+</div>
+</section>
+<section id="boksdiagram-inntekt-for-gifteikke-gifte-fordelt-på-kjønn" class="slide level2">
+<h2>Boksdiagram inntekt for gifte/ikke gifte fordelt på kjønn</h2>
+<div class="absolute" style="top: 150px; ">
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-bp-gifte-kjonn" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-bp-gifte-kjonn-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="ag_suggestions_files/figure-revealjs/fig-bp-gifte-kjonn-1.png" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bp-gifte-kjonn-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Sammenligning av inntektsfordeling gifte og ikke gifte etter kjønn
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="results" class="slide level2">
+<h2>Results</h2>
+<ul>
+<li>Sammenfattende viser resultatene at: - Alder har en svært svak lineær sammenheng med inntekt (r = −0.0102).</li>
+<li>Kjønn har en statistisk signifikant sammenheng med inntekt (p &lt; 2e−16), men forklarer kun 5,6 % av variasjonen.</li>
+<li>Sivilstatus har også en statistisk signifikant effekt (p &lt; 2.2e−16), men forklarer bare 3 % av variasjonen.</li>
+<li>Dette betyr at selv om kjønn og sivilstatus har signifikante effekter, er den totale forklaringseffekten på inntektsnivået begrenset.</li>
+<li>Andre faktorer som utdanning, yrke, arbeidserfaring og arbeidstid spiller trolig en langt større rolle.</li>
+</ul>
+</section>
+<section id="konklusjon" class="slide level2">
+<h2>Konklusjon</h2>
+<ul>
+<li>Analysen viser at alder, kjønn og sivilstatus alle har målbare, men svært varierende sammenhenger med inntekt.</li>
+<li>Alder har svært liten lineær effekt, mens kjønn og sivilstatus har statistisk signifikante,men begrensede effekter.</li>
+<li>Kjønn viser seg å være den sterkeste enkeltvariabelen i modellen, men den forklarer kun en liten del av variasjonen i inntekt.</li>
+<li>Dette innebærer at selv om lønnsforskjellen mellom menn og kvinner er reell, må årsakene søkes i et bredere sett av strukturelle faktorer, som utdanningsvalg, arbeidsmarkedstilknytning og kjønnsdelte yrker (<span class="citation" data-cites="judge2004">Judge &amp; Cable (<a href="#/references" role="doc-biblioref" onclick="">2004</a>)</span>; <span class="citation" data-cites="xie2022">Xie (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span>).
+<ul>
+<li>Sivilstatus har også en signifikant, men svak effekt.</li>
+</ul></li>
+</ul>
+</section>
+<section id="konklusjon-1" class="slide level2">
+<h2>Konklusjon</h2>
+<ul>
+<li>Gifte personer har høyere inntekt enn single, mens separerte har lavere inntekt.</li>
+<li>Dette kan gjenspeile både økonomisk stabilitet og ulikt ansvar for husholdning og forsørgelse, i tråd med funnene til <span class="citation" data-cites="seeborg2004">Seeborg (<a href="#/references" role="doc-biblioref" onclick="">2004</a>)</span> og <span class="citation" data-cites="mohanneill2014">Mohan-Neill &amp; colleagues (<a href="#/references" role="doc-biblioref" onclick="">2014</a>)</span>.</li>
+<li>Samlet viser resultatene at statistisk signifikante forskjeller ikke nødvendigvis betyr sterk forklaringskraft.</li>
+<li>Kjønn og sivilstatus har målbare effekter, men de forklarer bare en liten del av variasjonen i inntektsnivået.</li>
+<li>Dette tyder på at andre faktorer – som utdanning, erfaring, yrke og arbeidstid – spiller en større rolle, og at økonomisk ulikhet må forstås i et bredt, samfunnsmessig perspektiv.</li>
+</ul>
+</section>
+<section id="references" class="slide level2 smaller scrollable">
+<h2>References</h2>
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-judge2004" class="csl-entry" role="listitem">
+Judge, T. A. &amp; Cable, D. M. (2004). The effect of physical height on workplace success and income: Preliminary test of a theoretical model. <em>Journal of Applied Psychology</em>, <em>89</em>(3), 428–441. <a href="https://doi.org/10.1037/0021-9010.89.3.428">https://doi.org/10.1037/0021-9010.89.3.428</a>
+</div>
+<div id="ref-mohanneill2014" class="csl-entry" role="listitem">
+Mohan-Neill, S. T. &amp; colleagues. (2014). An analysis of US household socioeconomic profiles based on marital status and gender. <em>Academy of Accounting and Financial Studies Journal</em>, <em>18</em>(3), 63–76.
+</div>
+<div id="ref-seeborg2004" class="csl-entry" role="listitem">
+Seeborg, M. C. (2004). The effect of marital status on the relative standard of living of young men and young women. <em>Journal of Business and Economics Research</em>, <em>2</em>(1), 65–80.
+</div>
+<div id="ref-xie2022" class="csl-entry" role="listitem">
+Xie, R. (2022). The influence of education level, gender, race, marital status, age, and occupation on the wage of the general population. <em>Proceedings of the 7th International Conference on Social Sciences and Economic Development (ICSSED 2022)</em>. <a href="https://doi.org/10.2991/assehr.k.220405.155">https://doi.org/10.2991/assehr.k.220405.155</a>
+</div>
+</div>
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+<p>Presentasjon «Assignment 2» msb105</p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="ag_suggestions_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="ag_suggestions_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="ag_suggestions_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="ag_suggestions_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="ag_suggestions_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="ag_suggestions_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="ag_suggestions_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="ag_suggestions_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="ag_suggestions_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="ag_suggestions_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': true,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': true,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>
